@@ -54,6 +54,7 @@ function etype_menu() {
     'file path' => drupal_get_path('module', 'system'),
   );
 
+  /*
   $items['admin/config/etype/settings'] = array(
     'title' => 'eType Settings',
     'description' => 'eType integration options',
@@ -63,6 +64,7 @@ function etype_menu() {
     'access arguments' => ['administer site configuration'],
     'type' => MENU_NORMAL_ITEM,
   );
+  */
 
 
   return $items;
