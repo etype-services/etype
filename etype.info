@@ -1,6 +1,13 @@
 name = eType Services
 description = Custom module for eType Services.
+
 package = eType Services Custom Modules
 core = 7.x
 project = "etype"
 dependencies[] = entity
+
+files[] = etype.admin.inc
+files[] = etype.blocks.inc
+
+; Add if necessary
+;scripts[] = js/etype.js
