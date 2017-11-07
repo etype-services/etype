@@ -29,7 +29,9 @@ function etype_block_info() {
 
 /**
  * Implements hook_block_view()
+ *
  * @param string $delta
+ *
  * @return array
  */
 function etype_block_view($delta = '') {
