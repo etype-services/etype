@@ -76,6 +76,14 @@ function _etype_e_edition() {
 }
 
 /**
+ * Function to get path to site folder
+ * @return string
+ */
+function _etype_site_path() {
+  return $_SERVER['DOCUMENT_ROOT'] . base_path() . conf_path();
+}
+
+/**
  * Clean up node table
  */
 function etype_node_cleanup() {
@@ -98,7 +106,7 @@ function etype_node_cleanup() {
 function etype_classfied_mapping($vid) {
 
   $categories = array(); // set in include file, just to avoid IDE errors
-  $etype_site_path = etype_site_path();
+  $etype_site_path = _etype_site_path();
   include($etype_site_path . '/etype_settings.php');
 
   if (!isset($vid)) {
@@ -162,7 +170,7 @@ function etype_classified_ad_importer() {
 
   global $user;
   $url = ''; // set in include file, just to avoid IDE errors
-  $etype_site_path = etype_site_path();
+  $etype_site_path = _etype_site_path();
   $settings_file = $etype_site_path . '/etype_settings.php';
 
   if (file_exists($settings_file)) {
