@@ -6,59 +6,160 @@
  * Implements hook_block_info().
  */
 function etype_block_info() {
-  $blocks = [];
+  $blocks = array();
 
-  $blocks['e-Edition'] = [
+  $blocks['Social'] = array(
+    'info' => t('Social'),
+  );
+
+  $blocks['Follow'] = array(
+    'info' => t('Follow'),
+  );
+
+  $blocks['Facebook'] = array(
+    'info' => t('Facebook'),
+  );
+
+  $blocks['Twitter'] = array(
+    'info' => t('Twitter'),
+  );
+
+  $blocks['e-Edition'] = array(
     'info' => t('e-Edition'),
-  ];
-
-  $blocks['Social-Search'] = [
-    'info' => t('eType Social & Search'),
-  ];
-
-  $blocks['Follow'] = [
-    'info' => t('eType Follow'),
-  ];
-
-  $blocks['Contact-Page-Follow'] = [
-    'info' => t('eType Contact Page Follow'),
-  ];
-
+  );
   return $blocks;
 }
 
 /**
- * Implements hook_block_view()
- * @param string $delta
- * @return array
+ * Implements hook_block_view().
  */
 function etype_block_view($delta = '') {
-
-  $block = [];
+  $block = array();
   switch ($delta) {
+
+    case 'Social':
+      $block['subject'] = '';
+      $block['content'] = _etype_social_content();
+      break;
+
+    case 'Follow':
+      $block['subject'] = 'Follow Us';
+      $block['content'] = _etype_follow_content();
+      break;
+
+    case 'Facebook':
+      $block['subject'] = 'Facebook';
+      $block['content'] = _etype_facebook_content();
+      break;
+
+    case 'Twitter':
+      $block['subject'] = 'Twitter';
+      $block['content'] = _etype_twitter_content();
+      break;
+
     case 'e-Edition':
       $block['subject'] = '';
       $block['content'] = _etype_e_edition_content();
       break;
+  }
+  return $block;
+}
 
-    case 'Social-Search':
-      $block['subject'] = '';
-      $block['content'] = _etype_social_search_content();
-      break;
+/**
+ * Social Block
+ * @return null
+ */
+function _etype_social_content() {
+  $output = '
+  <ul class="social-links">';
+  $facebook = theme_get_setting('facebook');
+  $twitter = theme_get_setting('twitter');
+  $pinterest = theme_get_setting('pinterest');
+  $instagram = theme_get_setting('instagram');
+  $googleplus = theme_get_setting('googleplus');
+  $rssfeed = theme_get_setting('rssfeed');
+  if (!empty($facebook)) {
+    $output .= '<li><a class="facebook" href="https://www.facebook.com/' . $facebook . '"></a></li>';
+  }
+  if (!empty($twitter)) {
+    $output .= '<li><a class="twitter" href="https://twitter.com/' . $twitter . '"></a></li>';
+  }
+  if (!empty($pinterest)) {
+    $output .= '<li><a class="pinterest" href="https://www.pinterest.com/' . $pinterest . '"></a></li>';
+  }
+  if (!empty($instagram)) {
+    $output .= '<li><a class="instagram" href="https://instagram.com/' . $instagram . '"></a></li>';
+  }
+  if (!empty($googleplus)) {
+    $output .= '<li><a class="googleplus" href="https://plus.google.com/' . $googleplus . '"></a></li>';
+  }
+  if (!empty($rssfeed)) {
+    $output .= '<li><a class="rss" href="/rss.xml"></a></li>';
+  }
+  $output .= '</ul>';
+  return $output;
+}
 
-    case 'Follow':
-      $block['subject'] = '';
-      $block['content'] = _etype_follow_content();
-      break;
+/**
+ * Follow Block in Footer
+ * @return null
+ */
+function _etype_follow_content() {
+  $output = '';
+  $facebook = theme_get_setting('facebook');
+  $twitter = theme_get_setting('twitter');
+  $pinterest = theme_get_setting('pinterest');
+  $instagram = theme_get_setting('instagram');
+  $googleplus = theme_get_setting('googleplus');
+  $rssfeed = theme_get_setting('rssfeed');
+  if (!empty($facebook)) {
+    $output .= '<div class="facebook"><a href="https://www.facebook.com/' . $facebook . '">Like us on Facebook</a></div>';
+  }
+  if (!empty($twitter)) {
+    $output .= '<div class="twitter"><a href="https://twitter.com/' . $twitter . '">Follow us on Twitter</a></div>';
+  }
+  if (!empty($pinterest)) {
+    $output .= '<div class="pinterest"><a href="https://www.pinterest.com/' . $pinterest . '">Follow us on Pinterest</a></div>';
+  }
+  if (!empty($instagram)) {
+    $output .= '<div class="instagram"><a href="https://instagram.com/' . $instagram . '">Follow us on Instagram</a></div>';
+  }
+  if (!empty($googleplus)) {
+    $output .= '<div class="googleplus"><a href="https://plus.google.com/' . $googleplus . '">Follow us on Google Plus</a></div>';
+  }
+  if (!empty($rssfeed)) {
+    $output .= '<div class="rss"><a href="/rss.xml">RSS Feed</a></div>';
+  }
+  return $output;
+}
 
-    case 'Contact-Page-Follow':
-      $block['subject'] = '';
-      $block['content'] = _etype_contact_follow_content();
-      break;
-
+/**
+ * @return string
+ */
+function _etype_facebook_content() {
+  $output = '';
+  $facebook = theme_get_setting('facebook', 'cni');
+  if (!empty($facebook)) {
+    $output .= '
+ <div class="fb-page" data-href="https://www.facebook.com/' . $facebook . '" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+    ';
   }
 
-  return $block;
+  return $output;
+}
+
+/**
+ * @return string
+ */
+function _etype_twitter_content() {
+  $output = '';
+  $twitter = theme_get_setting('twitter');
+  if (!empty($twitter)) {
+    $output .= '
+<a class="twitter-timeline" data-height="300" href="https://twitter.com/' . $twitter . '">Tweets by ' . $twitter . '</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+  }
+
+  return $output;
 }
 
 /**
@@ -67,233 +168,10 @@ function etype_block_view($delta = '') {
 function _etype_e_edition_content() {
   $e_editions = etype_e_editions();
   $output = '';
-  foreach ($e_editions as $e_edition) {
+  foreach($e_editions as $e_edition) {
     $output .= '
-<p><a href="' . $e_edition['path'] . '"><img src="' . $e_edition['image'] . '"></a></p>
-<p><a href="' . $e_edition['path'] . '">Click here to read ' . $e_edition['site_name'] . '</a></p>
+<p class="rtecenter"><a href="' . $e_edition['path'] . '"><img src="' . $e_edition['image'] . '"></a></p><h4 class="rtecenter"><a href="' . $e_edition['path'] . '">Click here to read ' . $e_edition['site_name'] . '</a></h4>
 ';
   }
   return $output;
-}
-
-/**
- * Social & Search block for Navigation bar
- */
-function _etype_social_search_content() {
-
-  $output = '
-<div class="navigation-social-bookmarks">
-    <ul class="social-bookmarks">';
-
-  $facebook = variable_get('etype_facebook_top');
-  $twitter = variable_get('etype_twitter_top');
-  $googleplus = variable_get('etype_googleplus_top');
-  $instagram = variable_get('etype_instagram_top');
-  $youtube = variable_get('etype_youtube_top');
-  $pinterest = variable_get('etype_pinterest_top');
-  $vimeo = variable_get('etype_vimeo_top');
-  $rss = variable_get('etype_rss_top');
-
-  if ($facebook > 0) {
-    $url = variable_get('etype_facebook_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
-  }
-
-  if ($twitter > 0) {
-    $url = variable_get('etype_twitter_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
-  }
-
-  if ($googleplus > 0) {
-    $url = variable_get('etype_googleplus_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
-  }
-
-  if ($instagram > 0) {
-    $url = variable_get('etype_instagram_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
-  }
-
-  if ($youtube > 0) {
-    $url = variable_get('etype_youtube_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
-  }
-
-  if ($pinterest > 0) {
-    $url = variable_get('etype_pinterest_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
-  }
-
-  if ($vimeo > 0) {
-    $url = variable_get('etype_vimeo_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
-  }
-
-  if ($rss > 0) {
-    $output .= '<li><a href="/rss.xml"><i class="fa fa-rss-square"></i></a></li>';
-  }
-
-  $output .= '
-</ul>';
-
-  /* search box is poart of this block */
-  if (module_exists('search')) {
-    $output .= '
-    <div class="dropdown search-bar block-search">
-    <a data-toggle="dropdown" href="#" class="trigger"></a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li>';
-    $block = module_invoke('search', 'block_view', 'search');
-    $output .= render($block);
-    $output .= '</li></ul></div>';
-  }
-
-  $output .= '</div>';
-
-  return $output;
-
-}
-
-
-/**
- * Follow block for Footer region
- */
-function _etype_follow_content() {
-
-  $output = '
-<ul class="social-bookmarks">';
-
-  $facebook = variable_get('etype_facebook_footer');
-  $twitter = variable_get('etype_twitter_footer');
-  $googleplus = variable_get('etype_googleplus_footer');
-  $instagram = variable_get('etype_instagram_footer');
-  $youtube = variable_get('etype_youtube_footer');
-  $pinterest = variable_get('etype_pinterest_footer');
-  $vimeo = variable_get('etype_vimeo_footer');
-  $rss = variable_get('etype_rss_footer');
-
-  if ($facebook > 0) {
-    $url = variable_get('etype_facebook_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
-  }
-
-  if ($twitter > 0) {
-    $url = variable_get('etype_twitter_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
-  }
-
-  if ($googleplus > 0) {
-    $url = variable_get('etype_googleplus_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
-  }
-
-  if ($instagram > 0) {
-    $url = variable_get('etype_instagram_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
-  }
-
-  if ($youtube > 0) {
-    $url = variable_get('etype_youtube_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
-  }
-
-  if ($pinterest > 0) {
-    $url = variable_get('etype_pinterest_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
-  }
-
-  if ($vimeo > 0) {
-    $url = variable_get('etype_vimeo_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
-  }
-
-  if ($rss > 0) {
-    $output .= '<li><a href="/rss.xml"><i class="fa fa-rss-square"></i></a></li>';
-  }
-
-  /* email form
-  $output .= '
-</ul>';
-
-  $output .= '
-<div class="subscribe-form">
-    <form action="">
-        <div>
-            <div class="form-item form-type-textfield">
-<input type="text" class="form-text" name="subscribe" value="Your email address" onfocus="if (this.value == \'Your email address\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \'Your email address\';}" />
-            </div>
-            <div class="form-actions">
-<input value="" type="submit" id="edit-submit" name="subscribe" class="form-submit">
-            </div>
-        </div>
-     </form>
-</div>
-';
-  */
-
-  return $output;
-
-}
-
-/**
- * Follow block for Contact page
- */
-function _etype_contact_follow_content() {
-
-  $output = '
-<ul class="social-bookmarks large">';
-
-  $facebook = variable_get('etype_facebook_contact');
-  $twitter = variable_get('etype_twitter_contact');
-  $googleplus = variable_get('etype_googleplus_contact');
-  $instagram = variable_get('etype_instagram_contact');
-  $youtube = variable_get('etype_youtube_contact');
-  $pinterest = variable_get('etype_pinterest_contact');
-  $vimeo = variable_get('etype_vimeo_contact');
-  $rss = variable_get('etype_rss_contact');
-
-  if ($facebook > 0) {
-    $url = variable_get('etype_facebook_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
-  }
-
-  if ($twitter > 0) {
-    $url = variable_get('etype_twitter_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
-  }
-
-  if ($googleplus > 0) {
-    $url = variable_get('etype_googleplus_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
-  }
-
-  if ($instagram > 0) {
-    $url = variable_get('etype_instagram_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
-  }
-
-  if ($youtube > 0) {
-    $url = variable_get('etype_youtube_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
-  }
-
-  if ($pinterest > 0) {
-    $url = variable_get('etype_pinterest_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
-  }
-
-  if ($vimeo > 0) {
-    $url = variable_get('etype_vimeo_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
-  }
-
-  if ($rss > 0) {
-    $output .= '<li><a href="/rss.xml"><i class="fa fa-rss-square"></i></a></li>';
-  }
-
-  $output .= '
-</ul>';
-
-  return $output;
-
 }
