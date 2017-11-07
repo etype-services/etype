@@ -66,7 +66,7 @@ function etype_block_view($delta = '') {
 }
 
 /**
- * Social Block
+ * Social Block for Header
  * @return null
  */
 function _etype_social_content() {
