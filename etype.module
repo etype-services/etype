@@ -100,7 +100,7 @@ function etype_node_cleanup() {
 
 /**
  * @param $vid
- * @return int|mixed|void
+ * @return int|mixed
  * Map xml classified categories to Drupal taxonomy items
  */
 function etype_classfied_mapping($vid) {
