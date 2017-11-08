@@ -106,7 +106,7 @@ function etype_node_cleanup() {
  */
 function etype_cronapi($op, $job = NULL) {
   $cron_schedule = ''; // set in include file, just to avoid IDE errors
-  $etype_site_path = etype_site_path();
+  $etype_site_path = _etype_site_path();
   $settings_file = $etype_site_path . '/etype_settings.php';
   if (file_exists($settings_file)) {
     include($etype_site_path . '/etype_settings.php');
