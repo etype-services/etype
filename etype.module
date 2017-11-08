@@ -299,9 +299,9 @@ function etype_premium_access(&$node, $teaser = NULL) {
  */
 function etype_e_editions() {
   $uid = user_is_logged_in();
-  $e_edition = theme_get_setting('e_edition');
-  $pub = theme_get_setting('pub');
-  $ptype = theme_get_setting('ptype');
+  $e_edition = variable_get('e_edition');
+  $pub = variable_get('pub');
+  $ptype = variable_get('ptype');
   $site = variable_get('site_name', 'Drupal');
   $items = explode(',', $e_edition);
   $pubs = explode(',', $pub);
