@@ -99,6 +99,30 @@ function etype_node_cleanup() {
 }
 
 /**
+ * Cron Jobs
+ * @param $op
+ * @param null $job
+ * @return mixed
+ */
+function etype_cronapi($op, $job = NULL) {
+  $cron_schedule = ''; // set in include file, just to avoid IDE errors
+  $etype_site_path = _etype_site_path();
+  $settings_file = $etype_site_path . '/etype_settings.php';
+  if (file_exists($settings_file)) {
+    include($etype_site_path . '/etype_settings.php');
+    if (!empty($cron_schedule)) {
+      /* Classified importer */
+      $items['etype_classified_cron'] = array(
+        'description' => 'Import Classified Ads',
+        'rule' => $cron_schedule,
+        'callback' => 'etype_classified_ad_importer',
+      );
+      return $items;
+    }
+  }
+}
+
+/**
  * @param $vid
  * @return int|mixed|void
  * Map xml classified categories to Drupal taxonomy items
