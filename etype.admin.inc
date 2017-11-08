@@ -35,6 +35,14 @@ function etype_admin() {
     '#default_value' => variable_get('etype_ptype'),
   );
 
+  $form['e_edition']['etype_classified_cron'] = array(
+    '#type' => 'textfield',
+    '#title' => t('eType classified cron schedule'),
+    '#description' => t('Use crontab syntax'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_classified_cron'),
+  );
+
   /* facebook */
   $form['facebook'] = array(
     '#type' => 'fieldset',
