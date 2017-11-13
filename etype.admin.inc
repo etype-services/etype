@@ -37,7 +37,7 @@ function etype_admin() {
 
   $form['e_edition']['etype_classified_cron'] = array(
     '#type' => 'textfield',
-    '#title' => t('eType classified cron schedule'),
+    '#title' => t('eType Classified Cron Schedule'),
     '#description' => t('Use crontab syntax'),
     '#size' => 55,
     '#default_value' => variable_get('etype_classified_cron'),
@@ -58,19 +58,19 @@ function etype_admin() {
 
   $form['facebook']['etype_facebook_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_facebook_top', 0),
   ];
 
   $form['facebook']['etype_facebook_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_facebook_footer', 0),
   ];
 
   $form['facebook']['etype_facebook_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_facebook_contact', 0),
   ];
 
@@ -91,19 +91,19 @@ function etype_admin() {
 
   $form['twitter']['etype_twitter_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_twitter_top', 0),
   ];
 
   $form['twitter']['etype_twitter_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_twitter_footer', 0),
   ];
 
   $form['twitter']['etype_twitter_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_twitter_contact', 0),
   ];
 
@@ -123,19 +123,19 @@ function etype_admin() {
 
   $form['googleplus']['etype_googleplus_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_googleplus_top', 0),
   ];
 
   $form['googleplus']['etype_googleplus_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_googleplus_footer', 0),
   ];
 
   $form['googleplus']['etype_googleplus_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_googleplus_contact', 0),
   ];
 
@@ -155,19 +155,19 @@ function etype_admin() {
 
   $form['youtube']['etype_youtube_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_youtube_top', 0),
   ];
 
   $form['youtube']['etype_youtube_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_youtube_footer', 0),
   ];
 
   $form['youtube']['etype_youtube_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_youtube_contact', 0),
   ];
 
@@ -187,19 +187,19 @@ function etype_admin() {
 
   $form['instagram']['etype_instagram_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_instagram_top', 0),
   ];
 
   $form['instagram']['etype_instagram_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_instagram_footer', 0),
   ];
 
   $form['instagram']['etype_instagram_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_instagram_contact', 0),
   ];
 
@@ -219,19 +219,19 @@ function etype_admin() {
 
   $form['pinterest']['etype_pinterest_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_pinterest_top', 0),
   ];
 
   $form['pinterest']['etype_pinterest_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_pinterest_footer', 0),
   ];
 
   $form['pinterest']['etype_pinterest_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_pinterest_contact', 0),
   ];
 
@@ -251,19 +251,19 @@ function etype_admin() {
 
   $form['vimeo']['etype_vimeo_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_vimeo_top', 0),
   ];
 
   $form['vimeo']['etype_vimeo_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_vimeo_footer', 0),
   ];
 
   $form['vimeo']['etype_vimeo_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_vimeo_contact', 0),
   ];
 
@@ -275,20 +275,33 @@ function etype_admin() {
 
   $form['rss']['etype_rss_top'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
+    '#title' => t('Add link to main navigation bar (Newsplus theme only)'),
     '#default_value' => variable_get('etype_rss_top', 0),
   ];
 
   $form['rss']['etype_rss_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
+    '#title' => t('Add link to footer area (Newsplus theme only)'),
     '#default_value' => variable_get('etype_rss_footer', 0),
   ];
 
   $form['rss']['etype_rss_contact'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page'),
+    '#title' => t('Add link to Contact page (Newsplus theme only)'),
     '#default_value' => variable_get('etype_rss_contact', 0),
+  ];
+
+  /* Google Analytics identifier */
+  $form['google_analytics'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Google Analytics'),
+  ];
+
+  $form['pinterest']['etype_google_analytics_property_id'] = [
+    '#type' => 'textfield',
+    '#title' => t('Web Property ID (Synergy Theme only)'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_google_analytics_property_id', ''),
   ];
 
   return system_settings_form($form);
