@@ -297,7 +297,7 @@ function etype_admin() {
     '#title' => t('Google Analytics'),
   ];
 
-  $form['pinterest']['etype_google_analytics_property_id'] = [
+  $form['google_analytics']['etype_google_analytics_property_id'] = [
     '#type' => 'textfield',
     '#title' => t('Web Property ID (Synergy Theme only)'),
     '#size' => 55,
