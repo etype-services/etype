@@ -21,7 +21,7 @@ function etype_admin() {
 
   $form['e_edition']['etype_pub'] = [
     '#type' => 'textfield',
-    '#title' => t('eType Pub'),
+    '#title' => t('eType Pub Id'),
     '#description' => t('Separate multiple entries with a comma, in the same order as the e-Editions'),
     '#size' => 55,
     '#default_value' => variable_get('etype_pub'),
