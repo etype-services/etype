@@ -37,7 +37,7 @@ function etype_admin() {
 
   $form['e_edition']['etype_classified_cron'] = array(
     '#type' => 'textfield',
-    '#title' => t('eType Classified Cron Schedule'),
+    '#title' => t('eType Classified Import Schedule'),
     '#description' => t('Use crontab syntax'),
     '#size' => 55,
     '#default_value' => variable_get('etype_classified_cron'),
