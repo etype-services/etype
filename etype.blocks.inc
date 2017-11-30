@@ -98,37 +98,52 @@ function _etype_social_search_content() {
 
   if ($facebook > 0) {
     $url = variable_get('etype_facebook_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
+    }
   }
 
   if ($twitter > 0) {
     $url = variable_get('etype_twitter_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
+    }
   }
 
   if ($googleplus > 0) {
     $url = variable_get('etype_googleplus_url');
+    if (! empty($url)) {
+
+    }
     $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
   }
 
   if ($instagram > 0) {
     $url = variable_get('etype_instagram_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
+    }
   }
 
   if ($youtube > 0) {
     $url = variable_get('etype_youtube_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
+    }
   }
 
   if ($pinterest > 0) {
     $url = variable_get('etype_pinterest_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
+    }
   }
 
   if ($vimeo > 0) {
     $url = variable_get('etype_vimeo_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
+    }
   }
 
   if ($rss > 0) {
@@ -178,37 +193,51 @@ function _etype_follow_content() {
 
   if ($facebook > 0) {
     $url = variable_get('etype_facebook_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
+    }
   }
 
   if ($twitter > 0) {
     $url = variable_get('etype_twitter_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
+    }
   }
 
   if ($googleplus > 0) {
     $url = variable_get('etype_googleplus_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
+    }
   }
 
   if ($instagram > 0) {
     $url = variable_get('etype_instagram_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
+    }
   }
 
   if ($youtube > 0) {
     $url = variable_get('etype_youtube_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
+    }
   }
 
   if ($pinterest > 0) {
     $url = variable_get('etype_pinterest_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
+    }
   }
 
   if ($vimeo > 0) {
     $url = variable_get('etype_vimeo_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
+    }
   }
 
   if ($rss > 0) {
@@ -258,37 +287,51 @@ function _etype_contact_follow_content() {
 
   if ($facebook > 0) {
     $url = variable_get('etype_facebook_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-facebook"></i></a></li>';
+    }
   }
 
   if ($twitter > 0) {
     $url = variable_get('etype_twitter_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-twitter"></i></a></li>';
+    }
   }
 
   if ($googleplus > 0) {
     $url = variable_get('etype_googleplus_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-google-plus"></i></a></li>';
+    }
   }
 
   if ($instagram > 0) {
     $url = variable_get('etype_instagram_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-instagram"></i></a></li>';
+    }
   }
 
   if ($youtube > 0) {
     $url = variable_get('etype_youtube_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-youtube"></i></a></li>';
+    }
   }
 
   if ($pinterest > 0) {
     $url = variable_get('etype_pinterest_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-pinterest"></i></a></li>';
+    }
   }
 
   if ($vimeo > 0) {
     $url = variable_get('etype_vimeo_url');
-    $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
+    if (! empty($url)) {
+      $output .= '<li><a href="' . $url . '"><i class="fa fa-vimeo-square"></i></a></li>';
+    }
   }
 
   if ($rss > 0) {
