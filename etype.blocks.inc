@@ -138,18 +138,20 @@ function _etype_social_search_content() {
   $output .= '
 </ul>';
 
-  /* search box is poart of this block */
-  if (module_exists('search')) {
-    $output .= '
+  /* search box is part of this block */
+  $etype_add_search_to_social = variable_get('etype_add_search_to_social');
+  if ($etype_add_search_to_social === 1) {
+    if (module_exists('search')) {
+      $output .= '
     <div class="dropdown search-bar block-search">
     <a data-toggle="dropdown" href="#" class="trigger"></a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
     <li>';
-    $block = module_invoke('search', 'block_view', 'search');
-    $output .= render($block);
-    $output .= '</li></ul></div>';
+      $block = module_invoke('search', 'block_view', 'search');
+      $output .= render($block);
+      $output .= '</li></ul></div>';
+    }
   }
-
   $output .= '</div>';
 
   return $output;
