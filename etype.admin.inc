@@ -292,7 +292,7 @@ function etype_admin() {
   ];
 
   /* Search box */
-  $form['etype_add_search_to_social'] = [
+  $form['search_to_social'] = [
     '#type' => 'fieldset',
     '#title' => t('Search Block'),
   ];
