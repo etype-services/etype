@@ -152,8 +152,8 @@ function _etype_social_search_content() {
       $output .= '</li></ul></div>';
     }
   }
-  $output .= '</div>';
 
+  $output .= '</div>';
   return $output;
 
 }
