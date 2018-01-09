@@ -77,6 +77,7 @@ function _etype_social_content() {
   $pinterest = theme_get_setting('pinterest');
   $instagram = theme_get_setting('instagram');
   $googleplus = theme_get_setting('googleplus');
+  $youtube = theme_get_setting('youtube');
   $rssfeed = theme_get_setting('rssfeed');
   if (!empty($facebook)) {
     $output .= '<li><a class="facebook" href="https://www.facebook.com/' . $facebook . '"></a></li>';
@@ -92,6 +93,9 @@ function _etype_social_content() {
   }
   if (!empty($googleplus)) {
     $output .= '<li><a class="googleplus" href="https://plus.google.com/' . $googleplus . '"></a></li>';
+  }
+  if (!empty($youtube)) {
+    $output .= '<li><a class="youtube" href="' . $youtube . '"></a></li>';
   }
   if (!empty($rssfeed)) {
     $output .= '<li><a class="rss" href="/rss.xml"></a></li>';
@@ -111,6 +115,7 @@ function _etype_follow_content() {
   $pinterest = theme_get_setting('pinterest');
   $instagram = theme_get_setting('instagram');
   $googleplus = theme_get_setting('googleplus');
+  $youtube = theme_get_setting('youtube');
   $rssfeed = theme_get_setting('rssfeed');
   if (!empty($facebook)) {
     $output .= '<div class="facebook"><a href="https://www.facebook.com/' . $facebook . '">Like us on Facebook</a></div>';
@@ -126,6 +131,9 @@ function _etype_follow_content() {
   }
   if (!empty($googleplus)) {
     $output .= '<div class="googleplus"><a href="https://plus.google.com/' . $googleplus . '">Follow us on Google Plus</a></div>';
+  }
+  if (!empty($youtube)) {
+    $output .= '<div class="googleplus"><a href="' . $youtube . '">Follow us on YouTube</a></div>';
   }
   if (!empty($rssfeed)) {
     $output .= '<div class="rss"><a href="/rss.xml">RSS Feed</a></div>';
