@@ -133,7 +133,7 @@ function _etype_follow_content() {
     $output .= '<div class="googleplus"><a href="https://plus.google.com/' . $googleplus . '">Follow us on Google Plus</a></div>';
   }
   if (!empty($youtube)) {
-    $output .= '<div class="googleplus"><a href="' . $youtube . '">Follow us on YouTube</a></div>';
+    $output .= '<div class="youtube"><a href="' . $youtube . '">Follow us on YouTube</a></div>';
   }
   if (!empty($rssfeed)) {
     $output .= '<div class="rss"><a href="/rss.xml">RSS Feed</a></div>';
