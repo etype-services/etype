@@ -134,6 +134,8 @@ function etype_classfied_mapping($vid) {
   include($etype_site_path . '/etype_settings.php');
 
   if (!isset($vid)) {
+    $site_name = variable_get('site_name');
+    mail('charlie@etypeservices.com', 'No category id for item', "A VisionData ad lacked a category for $site_name");
     watchdog('etype', "No category id for item", $variables = array(), $severity = WATCHDOG_ERROR);
     return;
   }
@@ -149,6 +151,8 @@ function etype_classfied_mapping($vid) {
     }
 
     if ($ad_cat == 0) {
+      $site_name = variable_get('site_name');
+      mail('charlie@etypeservices.com', "$vid not matched", "VisionDate $vid not matched for $site_name");
       watchdog('etype', "%vid not matched", $variables = array('%vid' => $vid), $severity = WATCHDOG_ERROR);
     }
   }
@@ -253,7 +257,7 @@ function etype_classified_ad_importer() {
               $node = array(
                 'title' => $array['ItemTitle'],
                 'body' => $array['ItemDesc'],
-                'category' => etype_classfied_mapping($array['categoryId'])
+                'category' => $category,
               );
               // print_r($node);
               $values['created'] = strtotime($array['startDate']);
