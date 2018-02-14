@@ -373,3 +373,7 @@ function etype_get_site_identifier() {
   preg_match("/sites\/([a-z]+)\..*/", $base_path, $matches);
   return $matches[1];
 }
+
+function etype_preprocess_html($vars) {
+  $vars['classes_array'][] = etype_get_site_identifier();
+}
