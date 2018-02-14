@@ -371,5 +371,6 @@ function _etype_get_site_identifier() {
 }
 
 function etype_preprocess_html($variables) {
+  echo 'check';
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
