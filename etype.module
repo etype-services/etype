@@ -370,8 +370,9 @@ function _etype_get_site_identifier() {
   return $matches[1];
 }
 
-function etype_preprocess_html($variables) {
-  $class = _etype_get_site_identifier();
-  echo $class;
-  $variables['classes_array'][] = $class;
+/**
+ * @param $variables
+ */
+function etype_preprocess_html(&$variables) {
+  $variables['classes_array'][] = _etype_get_site_identifier();
 }
