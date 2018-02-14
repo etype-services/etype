@@ -366,11 +366,12 @@ function etype_e_editions() {
  */
 function _etype_get_site_identifier() {
   $base_path = conf_path();
-  echo $base_path;
   preg_match("/sites\/([a-z]+)\..*/", $base_path, $matches);
   return $matches[1];
 }
 
 function etype_preprocess_html($variables) {
-  $variables['classes_array'][] = _etype_get_site_identifier();
+  $class = _etype_get_site_identifier();
+  echo $class;
+  $variables['classes_array'][] = $class;
 }
