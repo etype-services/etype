@@ -376,3 +376,7 @@ function _etype_get_site_identifier() {
 function etype_preprocess_html(&$variables) {
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
+
+function etype_block_view_alter(&$data, $block) {
+  echo $block->delta;
+}
