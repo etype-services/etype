@@ -24,6 +24,10 @@ function etype_block_info() {
     'info' => t('eType Contact Page Follow'),
   ];
 
+  $blocks['eType Menu (Code)'] = [
+    'info' => t('eType Menu (Code)'),
+  ];
+
   return $blocks;
 }
 
@@ -56,6 +60,11 @@ function etype_block_view($delta = '') {
     case 'Contact-Page-Follow':
       $block['subject'] = '';
       $block['content'] = _etype_contact_follow_content();
+      break;
+
+    case 'eType Menu (Code)':
+      $block['subject'] = '';
+      $block['content'] = _etype_menu_content();
       break;
 
   }
@@ -343,4 +352,26 @@ function _etype_contact_follow_content() {
 
   return $output;
 
+}
+
+/**
+ * Fake User Menu
+ */
+function _etype_menu_content() {
+  global $user;
+  $output = "<ul class=\"user-menu menu\">";
+  if($user ->uid != 0) {
+    $username= $user ->name;
+    $pub_id = variable_get('etype_pub');
+    $ptype = variable_get('etype_ptype');
+    $output .= "<li><a 
+href=\"https://www.etypeservices.com/ReadTheEdition.aspx?Username=$username&Pub=$pub_id&PType=$ptype\"  title=\"\" target=\"_blank\">e-Edition</a></li>";
+    $output .= "<li><a href=\"/content/my-account\" title=\"\">My account</a></li>";
+    $output .= "<li><a href=\"/user/logout\" title=\"\">Log out</a></li>";
+  } else {
+    $e_edition =  variable_get('etype_e_edition');
+    $output .= "<a href=\"/content/custom-login-page\" title=\"\">Login</a><a href=\"https://www.etypeservices.com/$e_edition/\" title=\"\">Login</a>";
+  }
+  $output .= "</ul>";
+  return $output;
 }
