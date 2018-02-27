@@ -3,9 +3,6 @@
 /* Admin Settings */
 function etype_admin() {
 
-  global $theme_key;
-  echo $theme_key;
-
   $form = [];
 
   /* e_edition settings */
