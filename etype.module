@@ -378,5 +378,7 @@ function etype_preprocess_html(&$variables) {
 }
 
 function etype_block_view_alter(&$data, $block) {
-  echo $block->delta;
+  $data['e_edition'] =  variable_get('etype_e_edition');
+  $data['$pub_id'] = variable_get('etype_pub');
+  $data['$ptype'] = variable_get('etype_ptype');
 }
