@@ -48,7 +48,7 @@ function etype_menu() {
     'position' => 'right',
     'weight' => -15,
     'page callback' => 'system_admin_menu_block_page',
-    'access arguments' => ['administer site configuration'],
+    'access arguments' => array('access administration pages'),
     // Permission needed to view this area
     'file' => 'system.admin.inc',
     'file path' => drupal_get_path('module', 'system'),
@@ -60,7 +60,7 @@ function etype_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => ['etype_admin'],
     'file' => 'etype.admin.inc',
-    'access arguments' => ['administer site configuration', 'administer etype newsletters'],
+    'access arguments' => array('access administration pages'),
     'type' => MENU_NORMAL_ITEM,
   );
 
