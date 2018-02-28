@@ -60,7 +60,7 @@ function etype_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => ['etype_admin'],
     'file' => 'etype.admin.inc',
-    'access arguments' => ['administer site configuration'],
+    'access arguments' => ['administer site configuration', 'administer etype newsletters'],
     'type' => MENU_NORMAL_ITEM,
   ];
 
