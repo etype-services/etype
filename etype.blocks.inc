@@ -370,7 +370,8 @@ href=\"https://www.etypeservices.com/ReadTheEdition.aspx?Username=$username&Pub=
     $output .= "<li><a href=\"/user/logout\" title=\"\">Log out</a></li>";
   } else {
     $e_edition =  variable_get('etype_e_edition');
-    $output .= "<a href=\"/content/custom-login-page\" title=\"\">Login</a><a href=\"https://www.etypeservices.com/$e_edition/\" title=\"\">Login</a>";
+    $output .= "<li><a href=\"/content/custom-login-page\" title=\"\">Login</a></li><li><a 
+href=\"https://www.etypeservices.com/$e_edition/\" title=\"\">Subscribe</a></li>";
   }
   $output .= "</ul>";
   return $output;
