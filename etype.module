@@ -366,7 +366,7 @@ function etype_e_editions() {
  */
 function _etype_get_site_identifier() {
   $base_path = conf_path();
-  preg_match("/sites\/([a-z]+)\..*/", $base_path, $matches);
+  preg_match("/sites\/([-a-z]+)\..*/", $base_path, $matches);
   return $matches[1];
 }
 
