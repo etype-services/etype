@@ -72,7 +72,7 @@ function etype_block_view($delta = '') {
       break;
 
     case 'etype-facebook-feed':
-      $block['subject'] = '';
+      $block['subject'] = 'Facebook Feed';
       $block['content'] = _etype_facebook_feed_content();
       break;
 
