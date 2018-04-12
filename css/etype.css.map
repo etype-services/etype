@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AACE,4CAAkB;EAChB,OAAO,EAAE,IAAI",
+"mappings": "AACE,4CAAkB;EAChB,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY",
 "sources": ["../scss/etype.scss"],
 "names": [],
 "file": "etype.css"

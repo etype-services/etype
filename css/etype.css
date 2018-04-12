@@ -1,4 +1,5 @@
 #block-etype-social-search .social-bookmarks {
-  display: flex; }
+  display: flex;
+  justify-content: space-around; }
 
 /*# sourceMappingURL=etype.css.map */
