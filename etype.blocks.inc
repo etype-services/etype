@@ -28,6 +28,10 @@ function etype_block_info() {
     'info' => t('eType User Menu'),
   ];
 
+  $blocks['etype-facebook-feed'] = [
+    'info' => t('eType Facebook Feed'),
+  ];
+
   return $blocks;
 }
 
@@ -65,6 +69,11 @@ function etype_block_view($delta = '') {
     case 'etype-user-menu':
       $block['subject'] = '';
       $block['content'] = _etype_menu_content();
+      break;
+
+    case 'etype-facebook-feed':
+      $block['subject'] = '';
+      $block['content'] = _etype_facebook_feed_content();
       break;
 
   }
@@ -335,7 +344,7 @@ function _etype_contact_follow_content() {
 }
 
 /**
- * Fake User Menu
+ * eType User Menu
  */
 function _etype_menu_content() {
   global $user;
@@ -354,5 +363,25 @@ href=\"https://www.etypeservices.com/ReadTheEdition.aspx?Username=$username&Pub=
 href=\"https://www.etypeservices.com/$e_edition/\" title=\"\">Subscribe</a></li>";
   }
   $output .= "</ul>";
+  return $output;
+}
+
+/**
+ * @return string
+ */
+function _etype_facebook_feed_content() {
+  $url = variable_get('etype_facebook_url');
+  $name = variable_get('site_name');
+  $output = "
+  <div id=\"fb-root\"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class=\"fb-page\" data-href=\"$url\" data-tabs=\"timeline\" data-width=\"340\" data-height=\"600\" data-small-header=\"true\" data-adapt-container-width=\"true\" data-hide-cover=\"false\" data-show-facepile=\"false\"><blockquote cite=\"$url\" class=\"fb-xfbml-parse-ignore\"><a href=\"$url\">$name</a></blockquote></div>
+";
   return $output;
 }
