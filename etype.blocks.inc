@@ -156,7 +156,7 @@ function _etype_social_search_content() {
   }
 
   if ($rss > 0) {
-    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fab fa-fw fa-lg fa-rss-square"></i></a></li>';
+    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fas fa-fw fa-lg fa-rss-square"></i></a></li>';
   }
 
   $output .= '
@@ -250,7 +250,7 @@ function _etype_follow_content() {
   }
 
   if ($rss > 0) {
-    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fab fa-fw fa-lg fa-rss-square"></i></a></li>';
+    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fas fa-fw fa-lg fa-rss-square"></i></a></li>';
   }
 
   /* email form
@@ -344,7 +344,7 @@ function _etype_contact_follow_content() {
   }
 
   if ($rss > 0) {
-    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fab fa-fw fa-lg fa-rss-square"></i></a></li>';
+    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fas fa-fw fa-lg fa-rss-square"></i></a></li>';
   }
 
   $output .= '
