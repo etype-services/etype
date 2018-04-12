@@ -8,11 +8,11 @@
 function etype_block_info() {
   $blocks = [];
 
-  $blocks['e-edition'] = [
+  $blocks['e_edition'] = [
     'info' => t('e-Edition'),
   ];
 
-  $blocks['social-search'] = [
+  $blocks['social_search'] = [
     'info' => t('eType Social Search'),
   ];
 
@@ -20,11 +20,11 @@ function etype_block_info() {
     'info' => t('eType Follow'),
   ];
 
-  $blocks['contact-page-follow'] = [
+  $blocks['contact_page_follow'] = [
     'info' => t('eType Contact Page Follow'),
   ];
 
-  $blocks['etype-user-menu'] = [
+  $blocks['etype_user_menu'] = [
     'info' => t('eType User Menu'),
   ];
 
@@ -42,12 +42,12 @@ function etype_block_view($delta = '') {
 
   $block = [];
   switch ($delta) {
-    case 'e-edition':
+    case 'e_edition':
       $block['subject'] = '';
       $block['content'] = _etype_e_edition_content();
       break;
 
-    case 'social-search':
+    case 'social_search':
       $block['subject'] = '';
       $block['content'] = _etype_social_search_content();
       break;
@@ -57,12 +57,12 @@ function etype_block_view($delta = '') {
       $block['content'] = _etype_follow_content();
       break;
 
-    case 'contact-page-follow':
+    case 'contact_page_follow':
       $block['subject'] = '';
       $block['content'] = _etype_contact_follow_content();
       break;
 
-    case 'etype-user-menu':
+    case 'etype_user_menu':
       $block['subject'] = '';
       $block['content'] = _etype_menu_content();
       break;
