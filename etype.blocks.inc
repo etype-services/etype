@@ -286,54 +286,54 @@ function _etype_contact_follow_content() {
   if ($facebook > 0) {
     $url = variable_get('etype_facebook_url');
     if (! empty($url)) {
-      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-2x fa-facebook"></i></a></li>';
+      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-6x fa-facebook"></i></a></li>';
     }
   }
 
   if ($twitter > 0) {
     $url = variable_get('etype_twitter_url');
     if (! empty($url)) {
-      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-2x fa-twitter"></i></a></li>';
+      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-6x fa-twitter"></i></a></li>';
     }
   }
 
   if ($googleplus > 0) {
     $url = variable_get('etype_googleplus_url');
     if (! empty($url)) {
-      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-2x fa-google-plus"></i></a></li>';
+      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-6x fa-google-plus"></i></a></li>';
     }
   }
 
   if ($instagram > 0) {
     $url = variable_get('etype_instagram_url');
     if (! empty($url)) {
-      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-2x fa-instagram"></i></a></li>';
+      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-6x fa-instagram"></i></a></li>';
     }
   }
 
   if ($youtube > 0) {
     $url = variable_get('etype_youtube_url');
     if (! empty($url)) {
-      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-2x fa-youtube"></i></a></li>';
+      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-6x fa-youtube"></i></a></li>';
     }
   }
 
   if ($pinterest > 0) {
     $url = variable_get('etype_pinterest_url');
     if (! empty($url)) {
-      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-2x fa-pinterest"></i></a></li>';
+      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-6x fa-pinterest"></i></a></li>';
     }
   }
 
   if ($vimeo > 0) {
     $url = variable_get('etype_vimeo_url');
     if (! empty($url)) {
-      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-2x fa-vimeo-square"></i></a></li>';
+      $output .= '<li><a href="' . $url . '" target="_blank"><i class="fab fa-fw fa-6x fa-vimeo-square"></i></a></li>';
     }
   }
 
   if ($rss > 0) {
-    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fas fa-fw fa-2x fa-rss-square"></i></a></li>';
+    $output .= '<li><a href="/rss.xml" target="_blank"><i class="fas fa-fw fa-6x fa-rss-square"></i></a></li>';
   }
 
   $output .= '
