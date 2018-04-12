@@ -24,8 +24,8 @@ function etype_block_info() {
     'info' => t('eType Contact Page Follow'),
   ];
 
-  $blocks['eType Menu (Code)'] = [
-    'info' => t('eType Menu (Code)'),
+  $blocks['eType User Menu'] = [
+    'info' => t('eType User Menu'),
   ];
 
   return $blocks;
@@ -162,7 +162,7 @@ function _etype_social_search_content() {
   $output .= '
 </ul>';
 
-  /* search box is part of this block */
+  /* search box is part of this block for News+ theme */
   $etype_add_search_to_social = variable_get('etype_add_search_to_social');
   if ($etype_add_search_to_social === 1) {
     if (module_exists('search')) {
