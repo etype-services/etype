@@ -253,26 +253,6 @@ function _etype_follow_content() {
     $output .= '<li><a href="/rss.xml" target="_blank"><i class="fas fa-fw fa-lg fa-rss-square"></i></a></li>';
   }
 
-  /* email form
-  $output .= '
-</ul>';
-
-  $output .= '
-<div class="subscribe-form">
-    <form action="">
-        <div>
-            <div class="form-item form-type-textfield">
-<input type="text" class="form-text" name="subscribe" value="Your email address" onfocus="if (this.value == \'Your email address\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \'Your email address\';}" />
-            </div>
-            <div class="form-actions">
-<input value="" type="submit" id="edit-submit" name="subscribe" class="form-submit">
-            </div>
-        </div>
-     </form>
-</div>
-';
-  */
-
   return $output;
 
 }
