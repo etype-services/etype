@@ -42,7 +42,7 @@ function etype_block_view($delta = '') {
 
   $block = [];
   switch ($delta) {
-    case 'e_edition':
+    case 'e-edition':
       $block['subject'] = '';
       $block['content'] = _etype_e_edition_content();
       break;
