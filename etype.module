@@ -381,5 +381,6 @@ function etype_preprocess_html(&$variables) {
 ',
   ];
   drupal_add_html_head($fontawesome, 'etype');
+  drupal_add_css(drupal_get_path('module', 'etype') .'/css/etype.css');
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
