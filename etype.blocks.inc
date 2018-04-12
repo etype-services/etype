@@ -42,27 +42,27 @@ function etype_block_view($delta = '') {
 
   $block = [];
   switch ($delta) {
-    case 'e-Edition':
+    case 'e-edition':
       $block['subject'] = '';
       $block['content'] = _etype_e_edition_content();
       break;
 
-    case 'Social-Search':
+    case 'social-search':
       $block['subject'] = '';
       $block['content'] = _etype_social_search_content();
       break;
 
-    case 'Follow':
+    case 'follow':
       $block['subject'] = '';
       $block['content'] = _etype_follow_content();
       break;
 
-    case 'Contact-Page-Follow':
+    case 'contact-page-follow':
       $block['subject'] = '';
       $block['content'] = _etype_contact_follow_content();
       break;
 
-    case 'eType Menu (Code)':
+    case 'etype-user-menu':
       $block['subject'] = '';
       $block['content'] = _etype_menu_content();
       break;
