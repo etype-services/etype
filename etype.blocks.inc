@@ -8,23 +8,23 @@
 function etype_block_info() {
   $blocks = [];
 
-  $blocks['e-Edition'] = [
+  $blocks['e-edition'] = [
     'info' => t('e-Edition'),
   ];
 
-  $blocks['Social-Search'] = [
-    'info' => t('eType Social & Search'),
+  $blocks['social-search'] = [
+    'info' => t('eType Social Search'),
   ];
 
-  $blocks['Follow'] = [
+  $blocks['follow'] = [
     'info' => t('eType Follow'),
   ];
 
-  $blocks['Contact-Page-Follow'] = [
+  $blocks['contact-page-follow'] = [
     'info' => t('eType Contact Page Follow'),
   ];
 
-  $blocks['eType User Menu'] = [
+  $blocks['etype-user-menu'] = [
     'info' => t('eType User Menu'),
   ];
 
