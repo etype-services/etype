@@ -372,6 +372,7 @@ function _etype_get_site_identifier() {
 
 /**
  * @param $variables
+ * Add fontawesome script -- TODO remove theme fontawesome installs
  */
 function etype_preprocess_html(&$variables) {
   $fontawesome = [
