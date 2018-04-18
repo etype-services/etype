@@ -1,7 +1,7 @@
 /* add custom js */
 (function ($) {
   "use strict";
-  Drupal.behaviors.md_thenews = {
+  Drupal.behaviors.etype = {
     attach: function (context, settings) {
       $("a[href$='e-edition']").attr('target', '_blank');
     };
