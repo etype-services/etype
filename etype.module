@@ -19,7 +19,7 @@ function etype_menu() {
   /* Add first e-Edition link to User Menu */
   $items['e-edition'] = [
     'title' => 'e-Edition',
-    'description' => 'Link to e-Edition',
+    'description' => 'Read the e-Edition',
     'page callback' => '_etype_e_edition',
     'access arguments' => ['access content'],
     'menu_name' => 'user-menu',
