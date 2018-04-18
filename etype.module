@@ -315,6 +315,7 @@ function etype_premium_access(&$node, $teaser = NULL) {
 
 /**
  * Parse e-Edition settings into an array for use in other functions
+ * @return array
  */
 function etype_e_editions() {
   $uid = user_is_logged_in();
