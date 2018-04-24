@@ -388,7 +388,7 @@ function etype_preprocess_html(&$variables) {
   ];
   drupal_add_html_head($fontawesome, 'etype');
 
-  $adsense = theme_get_setting('etype_google_adsense_property_id');
+  $adsense = variable_get('etype_google_adsense_property_id');
   if (!empty($adsense)) {
     $adsense_script = [
       '#type' => 'markup',
