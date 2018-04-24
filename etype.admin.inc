@@ -306,16 +306,23 @@ function etype_admin() {
 
 
   /* Google Analytics identifier */
-  $form['google_analytics'] = [
+  $form['etype_google'] = [
     '#type' => 'fieldset',
     '#title' => t('Google Analytics'),
   ];
 
-  $form['google_analytics']['etype_google_analytics_property_id'] = [
+  $form['etype_google']['etype_google_analytics_property_id'] = [
     '#type' => 'textfield',
-    '#title' => t('Web Property ID (Synergy Theme only)'),
+    '#title' => t('Anayhtics Web Property ID'),
     '#size' => 55,
     '#default_value' => variable_get('etype_google_analytics_property_id', ''),
+  ];
+
+  $form['etype_google']['etype_google_adsense_property_id'] = [
+    '#type' => 'textfield',
+    '#title' => t('Adsense ID'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_google_adsense_property_id', ''),
   ];
 
   return system_settings_form($form);
