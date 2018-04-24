@@ -386,7 +386,7 @@ function etype_preprocess_html(&$variables) {
 <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 ',
   ];
-  drupal_add_html_head($fontawesome, 'etype');
+  drupal_add_html_head($fontawesome, 'etype_fontawesome');
 
   $adsense = variable_get('etype_google_adsense_property_id');
   if (!empty($adsense)) {
@@ -401,7 +401,7 @@ enable_page_level_ads: true
 </script> 
 ',
     ];
-    drupal_add_html_head($adsense_script, 'etype');
+    drupal_add_html_head($adsense_script, 'etype_adsense');
   }
 
   drupal_add_css(drupal_get_path('module', 'etype') .'/css/etype.css');
