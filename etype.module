@@ -364,3 +364,29 @@ function etype_e_editions() {
   }
   return $e_editions;
 }
+
+/**
+ * @return mixed
+ */
+function _etype_get_site_identifier() {
+  $base_path = conf_path();
+  preg_match("/sites\/([-a-z]+)\..*/", $base_path, $matches);
+  return $matches[1];
+}
+
+/**
+ * @param $variables
+ * Add fontawesome script
+ */
+function etype_preprocess_html(&$variables) {
+  $fontawesome = [
+    '#type' => 'markup',
+    '#markup' => '
+<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+',
+  ];
+  drupal_add_html_head($fontawesome, 'etype');
+  drupal_add_css(drupal_get_path('module', 'etype') .'/css/etype.css');
+  drupal_add_js(drupal_get_path('module', 'etype') .'/js/etype.js');
+  $variables['classes_array'][] = _etype_get_site_identifier();
+}
