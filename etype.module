@@ -338,8 +338,12 @@ function etype_e_editions() {
     $imagedir = trim($ar2[0]);
     $e_editions[$ptr]['image'] = 'https://etypeservices.com/LandingPageImages/' . $imagedir . '/currentpg1.jpg';
 
-    $pub = trim($pubs[$ptr]);
-    $ptype = trim($ptypes[$ptr]);
+    if (isset($pubs[$ptr])) {
+      $pub = trim($pubs[$ptr]);
+    }
+    if (isset($ptypes[$ptr])) {
+      $ptype = trim($ptypes[$ptr]);
+    }
     $e_edition = trim($arr[0]);
 
     if ($uid > 0) {
