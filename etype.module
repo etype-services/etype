@@ -328,9 +328,18 @@ function etype_e_editions() {
   $pub = empty(theme_get_setting('pub'))? variable_get('etype_pub'): theme_get_setting('pub');
   $ptype = empty(theme_get_setting('ptype'))? variable_get('etype_ptype'): theme_get_setting('ptype');
   $site = variable_get('site_name', 'Drupal');
-  $items = explode(',', $e_edition);
-  $pubs = explode(',', $pub);
-  $ptypes = explode(',', $ptype);
+
+  /* because Lutcher has a comma */
+  if (strpos($e_edition, '|') !== false) {
+    $items = explode(',', $e_edition);
+    $pubs = explode(',', $pub);
+    $ptypes = explode(',', $ptype);
+  } else {
+    $items = [$e_edition];
+    $pubs = [$pub];
+    $ptypes = [$ptype];
+  }
+
   $e_editions = [];
   $ptr = 0;
   foreach ($items as $item) {
