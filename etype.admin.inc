@@ -313,7 +313,7 @@ function etype_admin() {
 
   $form['etype_google']['etype_google_analytics_property_id'] = [
     '#type' => 'textfield',
-    '#title' => t('Anayhtics Web Property ID'),
+    '#title' => t('Analytics Web Property ID'),
     '#size' => 55,
     '#default_value' => variable_get('etype_google_analytics_property_id', ''),
   ];
@@ -323,6 +323,28 @@ function etype_admin() {
     '#title' => t('Adsense ID'),
     '#size' => 55,
     '#default_value' => variable_get('etype_google_adsense_property_id', ''),
+  ];
+
+  /* Scripts */
+  $form['etype_scripts'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Scripts'),
+  ];
+
+  $form['etype_scripts']['etype_head_script'] = [
+    '#type' => 'textarea',
+    '#title' => t('Script(s) for &lt;head&gt;'),
+    '#description' => t('Inserted at the end of &lt;head&gt; area'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_head_script', ''),
+  ];
+
+  $form['etype_scripts']['etype_body_script'] = [
+    '#type' => 'textarea',
+    '#title' => t('Script(s) for &lt;body&gt;'),
+    '#description' => t('Inserted at the end of &lt;body&gt; area'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_body_script', ''),
   ];
 
   return system_settings_form($form);
