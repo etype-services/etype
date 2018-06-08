@@ -414,7 +414,7 @@ function etype_ranking() {
 
 /**
  * Implement hook_preprocess_search_results()
-
+ */
 function etype_preprocess_search_results(&$vars) {
   $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
   // dsm($results);
@@ -432,5 +432,5 @@ function etype_preprocess_search_results(&$vars) {
   $output = implode(" ", $output_results) . "<br>"; // convert array to string
   $vars['search_results'] = $output;
   #dsm($vars);
-}*/
+}
 
