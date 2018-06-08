@@ -6,7 +6,6 @@ include_once 'etype.blocks.inc';
 /**
  * @file
  * Custom functions and hooks for Etype Services
- *
  */
 
 /**
@@ -125,7 +124,6 @@ function etype_cronapi($op, $job = NULL) {
 
 /**
  * @param $vid
- *
  * @return int|mixed|void
  * Map xml classified categories to Drupal taxonomy items
  */
@@ -138,8 +136,7 @@ function etype_classfied_mapping($vid) {
   if (!isset($vid)) {
     watchdog('etype', "No category id for item", $variables = [], $severity = WATCHDOG_ERROR);
     return;
-  }
-  else {
+  } else {
 
     $ad_cat = 0;
 
@@ -160,7 +157,6 @@ function etype_classfied_mapping($vid) {
 
 /**
  * Create Entity
- *
  * @param array $item
  * @param array $values
  * @param string $entity_type
@@ -234,8 +230,7 @@ function etype_classified_ad_importer() {
             node_delete_multiple($nids);
             watchdog('etype', "EType Classified Importer deleted %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
             // drupal_set_message(t("EType Classified Importer deleted $i expired nodes"), 'status');
-          }
-          else {
+          } else {
             watchdog('etype', "EType Classified Importer found no Classified Ads to delete", $variables = [], $severity = WATCHDOG_NOTICE);
           }
 
@@ -267,8 +262,7 @@ function etype_classified_ad_importer() {
         }
         watchdog('etype', "EType Classified Importer added %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
         // drupal_set_message(t("EType Classified Importer added $i nodes"), 'status');
-      }
-      else {
+      } else {
         watchdog('etype', "EType Classified Importer found no xml at %url", $variables = ['%url' => $url], $severity = WATCHDOG_NOTICE);
       }
 
@@ -300,7 +294,6 @@ function etype_form_contact_site_form_alter(&$form, &$form_state, $form_id) {
 /**
  * @param $node
  * @param $teaser
- *
  * @return bool
  * override premium level for Shoutem feeds
  */
@@ -364,12 +357,10 @@ function etype_e_editions() {
       if (!empty ($pub)) {
         global $user;
         $path = 'https://etypeservices.com/ReadTheEdition.aspx?Username=' . $user->name . "&Pub=" . $pub . "&PType=" . $ptype;
-      }
-      else {
+      } else {
         $path = 'https://etypeservices.com/' . $e_edition . '/';
       }
-    }
-    else {
+    } else {
       $path = 'https://etypeservices.com/' . $e_edition . '/';
     }
 
@@ -418,7 +409,42 @@ enable_page_level_ads: true
     drupal_add_html_head($adsense_script, 'etype_adsense');
   }
 
-  drupal_add_css(drupal_get_path('module', 'etype') .'/css/etype.css');
-  drupal_add_js(drupal_get_path('module', 'etype') .'/js/etype.js');
+  drupal_add_css(drupal_get_path('module', 'etype') . '/css/etype.css');
+  drupal_add_js(drupal_get_path('module', 'etype') . '/js/etype.js');
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
+
+/**
+ * Implement hook_ranking()
+ */
+function etype_ranking() {
+  return array(
+    'node_updated_date' => array(
+      'title' => t('Node Updated Date'),
+      'score' => 'n.changed',
+    ),
+  );
+}
+
+/**
+ * Implement hook_preprocess_search_results()
+ */
+function etype_preprocess_search_results(&$vars) {
+  $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
+  // dsm($results);
+  usort($results, function ($v1, $v2) {
+    return $v2['node']->changed - $v1['node']->changed; // sort by updated time, DESC order
+  });
+  $value = '';
+  $output_results = [];
+  foreach ($results as $item) {
+    $value .= theme('search_result', ['result' => $item, 'module' => $vars['module']]);
+    $output_results[] = $value;
+    $value = '';
+  } // store all results into an array
+  #dsm($output_results);
+  $output = implode(" ", $output_results) . "<br>"; // convert array to string
+  $vars['search_results'] = $output;
+  #dsm($vars);
+}
+
