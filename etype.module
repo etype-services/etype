@@ -408,3 +408,46 @@ enable_page_level_ads: true
   drupal_add_js(drupal_get_path('module', 'etype') .'/js/etype.js');
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
+
+/**
+ * SEARCH
+ */
+function etype_search_info() {
+  // Make the title translatable.
+  t('Content');
+
+  return array(
+    'title' => 'Content',
+    'path' => 'node',
+    'conditions_callback' => 'callback_search_conditions',
+  );
+}
+
+function etype_update_index() {
+  $limit = (int)variable_get('search_cron_limit', 100);
+
+  $result = db_query_range("SELECT n.nid FROM {node} n LEFT JOIN {search_dataset} d ON d.type = 'node' AND d.sid = n.nid WHERE d.sid IS NULL OR d.reindex <> 0 ORDER BY d.reindex ASC, n.nid ASC", 0, $limit);
+
+  foreach ($result as $node) {
+    $node = node_load($node->nid);
+
+    // Save the changed time of the most recent indexed node, for the search
+    // results half-life calculation.
+    variable_set('node_cron_last', $node->changed);
+
+    // Render the node.
+    node_build_content($node, 'search_index');
+    $node->rendered = drupal_render($node->content);
+
+    $text = '<h1>' . check_plain($node->title) . '</h1>' . $node->rendered;
+
+    // Fetch extra data normally not visible
+    $extra = module_invoke_all('node_update_index', $node);
+    foreach ($extra as $t) {
+      $text .= $t;
+    }
+
+    // Update index
+    search_index($node->nid, 'node', $text);
+  }
+}
