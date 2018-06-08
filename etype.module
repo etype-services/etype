@@ -399,6 +399,19 @@ enable_page_level_ads: true
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
 
+
+/**
+ * Implement hook_ranking()
+ */
+function etype_ranking() {
+  return array(
+    'node_created_date' => array(
+      'title' => t('Node Creation Date'),
+      'score' => 'n.created',
+    ),
+  );
+}
+
 /**
  * Implement hook_preprocess_search_results()
  */
