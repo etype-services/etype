@@ -419,7 +419,7 @@ function etype_preprocess_search_results(&$vars) {
   $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
   // dsm($results);
   usort($results, function ($v1, $v2) {
-    return $v2['node']->changed - $v1['node']->changed; // sort by created time, DESC order
+    return $v2['node']->changed - $v1['node']->changed; // sort by updated time, DESC order
   });
   $value = '';
   $output_results = [];
