@@ -417,11 +417,11 @@ function etype_ranking() {
  */
 function etype_preprocess_search_results(&$vars) {
   $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
+  dsm($results);
   usort($results, function ($v1, $v2) {
     return $v2['node']->created - $v1['node']->created; // sort by created time, DESC order
   });
   $value = '';
-  $output = '';
   $output_results = [];
   foreach ($results as $item) {
     $value .= theme('search_result', ['result' => $item, 'module' => $vars['module']]);
