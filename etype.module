@@ -399,7 +399,6 @@ enable_page_level_ads: true
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
 
-
 /**
  * Implement hook_ranking()
  */
