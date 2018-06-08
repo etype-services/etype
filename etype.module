@@ -6,7 +6,6 @@ include_once 'etype.blocks.inc';
 /**
  * @file
  * Custom functions and hooks for Etype Services
- *
  */
 
 /**
@@ -77,7 +76,6 @@ function _etype_e_edition() {
 
 /**
  * Function to get path to site folder
- *
  * @return string
  */
 function _etype_site_path() {
@@ -109,18 +107,17 @@ function etype_cronapi($op, $job = NULL) {
   $cron_schedule = variable_get('etype_classified_cron');
   if (!empty($cron_schedule)) {
     /* Classified importer */
-    $items['etype_classified_cron'] = array(
+    $items['etype_classified_cron'] = [
       'description' => 'Import Classified Ads',
       'rule' => $cron_schedule,
       'callback' => 'etype_classified_ad_importer',
-    );
+    ];
     return $items;
   }
 }
 
 /**
  * @param $vid
- *
  * @return int|mixed|void
  * Map xml classified categories to Drupal taxonomy items
  */
@@ -133,8 +130,7 @@ function etype_classfied_mapping($vid) {
   if (!isset($vid)) {
     watchdog('etype', "No category id for item", $variables = [], $severity = WATCHDOG_ERROR);
     return;
-  }
-  else {
+  } else {
 
     $ad_cat = 0;
 
@@ -155,7 +151,6 @@ function etype_classfied_mapping($vid) {
 
 /**
  * Create Entity
- *
  * @param array $item
  * @param array $values
  * @param string $entity_type
@@ -229,8 +224,7 @@ function etype_classified_ad_importer() {
             node_delete_multiple($nids);
             watchdog('etype', "EType Classified Importer deleted %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
             // drupal_set_message(t("EType Classified Importer deleted $i expired nodes"), 'status');
-          }
-          else {
+          } else {
             watchdog('etype', "EType Classified Importer found no Classified Ads to delete", $variables = [], $severity = WATCHDOG_NOTICE);
           }
 
@@ -262,8 +256,7 @@ function etype_classified_ad_importer() {
         }
         watchdog('etype', "EType Classified Importer added %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
         // drupal_set_message(t("EType Classified Importer added $i nodes"), 'status');
-      }
-      else {
+      } else {
         watchdog('etype', "EType Classified Importer found no xml at %url", $variables = ['%url' => $url], $severity = WATCHDOG_NOTICE);
       }
 
@@ -295,7 +288,6 @@ function etype_form_contact_site_form_alter(&$form, &$form_state, $form_id) {
 /**
  * @param $node
  * @param $teaser
- *
  * @return bool
  * override premium level for Shoutem feeds
  */
@@ -319,9 +311,9 @@ function etype_premium_access(&$node, $teaser = NULL) {
  */
 function etype_e_editions() {
   $uid = user_is_logged_in();
-  $e_edition = empty(theme_get_setting('e_edition'))? variable_get('etype_e_edition'): theme_get_setting('e_edition');
-  $pub = empty(theme_get_setting('pub'))? variable_get('etype_pub'): theme_get_setting('pub');
-  $ptype = empty(theme_get_setting('ptype'))? variable_get('etype_ptype'): theme_get_setting('ptype');
+  $e_edition = empty(theme_get_setting('e_edition')) ? variable_get('etype_e_edition') : theme_get_setting('e_edition');
+  $pub = empty(theme_get_setting('pub')) ? variable_get('etype_pub') : theme_get_setting('pub');
+  $ptype = empty(theme_get_setting('ptype')) ? variable_get('etype_ptype') : theme_get_setting('ptype');
   $site = variable_get('site_name', 'Drupal');
   $items = explode(',', $e_edition);
   $pubs = explode(',', $pub);
@@ -350,12 +342,10 @@ function etype_e_editions() {
       if (!empty ($pub)) {
         global $user;
         $path = 'https://etypeservices.com/ReadTheEdition.aspx?Username=' . $user->name . "&Pub=" . $pub . "&PType=" . $ptype;
-      }
-      else {
+      } else {
         $path = 'https://etypeservices.com/' . $e_edition . '/';
       }
-    }
-    else {
+    } else {
       $path = 'https://etypeservices.com/' . $e_edition . '/';
     }
 
@@ -404,50 +394,30 @@ enable_page_level_ads: true
     drupal_add_html_head($adsense_script, 'etype_adsense');
   }
 
-  drupal_add_css(drupal_get_path('module', 'etype') .'/css/etype.css');
-  drupal_add_js(drupal_get_path('module', 'etype') .'/js/etype.js');
+  drupal_add_css(drupal_get_path('module', 'etype') . '/css/etype.css');
+  drupal_add_js(drupal_get_path('module', 'etype') . '/js/etype.js');
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
 
 /**
- * SEARCH
+ * Implement hook_preprocess_search_results()
  */
-function etype_search_info() {
-  // Make the title translatable.
-  t('Content');
-
-  return array(
-    'title' => 'Content',
-    'path' => 'node',
-    'conditions_callback' => 'callback_search_conditions',
-  );
+function etype_preprocess_search_results(&$vars) {
+  $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
+  usort($results, function ($v1, $v2) {
+    return $v2['node']->created - $v1['node']->created; // sort by created time, DESC order
+  });
+  $value = '';
+  $output = '';
+  $output_results = [];
+  foreach ($results as $item) {
+    $value .= theme('search_result', ['result' => $item, 'module' => $vars['module']]);
+    $output_results[] = $value;
+    $value = '';
+  } // store all results into an array
+  #dsm($output_results);
+  $output = implode(" ", $output_results) . "<br>"; // convert array to string
+  $vars['search_results'] = $output;
+  #dsm($vars);
 }
 
-function etype_update_index() {
-  $limit = (int)variable_get('search_cron_limit', 100);
-
-  $result = db_query_range("SELECT n.nid FROM {node} n LEFT JOIN {search_dataset} d ON d.type = 'node' AND d.sid = n.nid WHERE d.sid IS NULL OR d.reindex <> 0 ORDER BY d.reindex ASC, n.nid ASC", 0, $limit);
-
-  foreach ($result as $node) {
-    $node = node_load($node->nid);
-
-    // Save the changed time of the most recent indexed node, for the search
-    // results half-life calculation.
-    variable_set('node_cron_last', $node->changed);
-
-    // Render the node.
-    node_build_content($node, 'search_index');
-    $node->rendered = drupal_render($node->content);
-
-    $text = '<h1>' . check_plain($node->title) . '</h1>' . $node->rendered;
-
-    // Fetch extra data normally not visible
-    $extra = module_invoke_all('node_update_index', $node);
-    foreach ($extra as $t) {
-      $text .= $t;
-    }
-
-    // Update index
-    search_index($node->nid, 'node', $text);
-  }
-}
