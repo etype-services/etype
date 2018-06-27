@@ -419,9 +419,9 @@ enable_page_level_ads: true
  */
 function etype_ranking() {
   return array(
-    'node_updated_date' => array(
-      'title' => t('Node Updated Date'),
-      'score' => 'n.changed',
+    'node_created_date' => array(
+      'title' => t('Node Published Date'),
+      'score' => 'n.created',
     ),
   );
 }
@@ -433,7 +433,7 @@ function etype_preprocess_search_results(&$vars) {
   $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
   // dsm($results);
   usort($results, function ($v1, $v2) {
-    return $v2['node']->changed - $v1['node']->changed; // sort by updated time, DESC order
+    return $v2['node']->created - $v1['node']->created; // sort by updated time, DESC order
   });
   $value = '';
   $output_results = [];
