@@ -19,12 +19,15 @@ function etype_admin() {
     '#default_value' => variable_get('etype_e_edition'),
   ];
 
+  $etype_pub = variable_get('etype_pub');
+  $etype_pub_fixed = preg_replace("/[\s_]/", "", $etype_pub);
+
   $form['e_edition']['etype_pub'] = [
     '#type' => 'textfield',
     '#title' => t('eType Pub Id'),
     '#description' => t('Separate multiple entries with a comma, in the same order as the e-Editions'),
     '#size' => 55,
-    '#default_value' => variable_get('etype_pub'),
+    '#default_value' => $etype_pub_fixed,
   ];
 
   $form['e_edition']['etype_ptype'] = [
