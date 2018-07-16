@@ -308,10 +308,10 @@ function etype_admin() {
   ];
 
 
-  /* Google Analytics identifier */
+  /* Google identifiers */
   $form['etype_google'] = [
     '#type' => 'fieldset',
-    '#title' => t('Google Analytics'),
+    '#title' => t('Google'),
   ];
 
   $form['etype_google']['etype_google_analytics_property_id'] = [
