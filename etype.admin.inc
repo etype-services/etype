@@ -366,7 +366,7 @@ function etype_admin() {
   $form['etype_classified']['etype_classified_map'] = [
     '#type' => 'textarea',
     '#title' => t('eType Classified Mapping'),
-    '#description' => t('Enter VDATA Category Id and matching Classified Ad term id on one line, e.g C101|123'),
+    '#description' => t('Enter VDATA Category Id and matching <a href="/admin/structure/taxonomy/classified_categories" target="_blank">Classified Ad term id</a> on one line, e.g C101|123'),
     '#size' => 101,
     '#default_value' => variable_get('etype_classified_map'),
   ];
