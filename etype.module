@@ -137,7 +137,7 @@ function etype_classfied_mapping($vid) {
     $etype_site_path = _etype_site_path();
     include($etype_site_path . '/etype_settings.php');
   } else {
-    foreach (explode('\r\n', $cats) as $item) {
+    foreach (explode(PHP_EOL, $cats) as $item) {
       $arr = explode('|', $item);
       $categories[$arr[0]] = $arr[1];
     }
