@@ -363,12 +363,12 @@ function etype_admin() {
     '#default_value' => variable_get('etype_classified_cron'),
   );
 
-  $form['etype_classified']['etype_classified_mapping'] = [
+  $form['etype_classified']['etype_classified_map'] = [
     '#type' => 'textarea',
     '#title' => t('eType Classified Mapping'),
     '#description' => t('Enter VDATA Category Id and matching Classified Ad term id on one line, e.g C101|123'),
     '#size' => 101,
-    '#default_value' => variable_get('etype_classified_mapping'),
+    '#default_value' => variable_get('etype_classified_map'),
   ];
 
   return system_settings_form($form);
