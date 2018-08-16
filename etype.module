@@ -133,6 +133,7 @@ function etype_cronapi($op, $job = NULL) {
 function etype_classfied_mapping($vid) {
 
   $cats = variable_get('etype_classified_map');
+  $categories = [];
   if (empty ($cats)) {
     $etype_site_path = _etype_site_path();
     include($etype_site_path . '/etype_settings.php');
