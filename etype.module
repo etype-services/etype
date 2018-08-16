@@ -132,7 +132,7 @@ function etype_cronapi($op, $job = NULL) {
  */
 function etype_classfied_mapping($vid) {
 
-  $categories = variable_get('etype_classified_map'); // set in include file, just to avoid IDE errors
+  $categories = variable_get('etype_classified_map');
   if (empty ($categories)) {
     $etype_site_path = _etype_site_path();
     include($etype_site_path . '/etype_settings.php');
@@ -142,9 +142,6 @@ function etype_classfied_mapping($vid) {
       $categories[$arr[0]] = $arr[1];
     }
   }
-
-  var_dump($categories);
-  exit;
 
   if (!isset($vid)) {
     watchdog('etype', "No category id for item", $variables = [], $severity = WATCHDOG_ERROR);
