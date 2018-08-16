@@ -348,6 +348,13 @@ function etype_admin() {
     '#title' => t('Classified Ads Import Settings'),
   ];
 
+  $form['etype_classified']['etype_classified_import_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('eType Classified Import URL'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_classified_import_url'),
+  );
+
   $form['etype_classified']['etype_classified_cron'] = array(
     '#type' => 'textfield',
     '#title' => t('eType Classified Import Schedule'),
