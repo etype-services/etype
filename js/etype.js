@@ -7,6 +7,7 @@
 
             var autocompleteOff = function () {
               $("#contact-site-form").attr("autocomplete", "nope");
+              $("#contact-site-form > .form-item > input").attr("autocomplete", "nope");
             };
             autocompleteOff();
         }
