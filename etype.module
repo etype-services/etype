@@ -116,11 +116,11 @@ function etype_cronapi($op, $job = NULL) {
 
   if (!empty($cron_schedule)) {
     /* Classified importer */
-    $items['etype_classified_cron'] = array(
+    $items['etype_classified_cron'] = [
       'description' => 'Import Classified Ads',
       'rule' => $cron_schedule,
       'callback' => 'etype_classified_ad_importer',
-    );
+    ];
     return $items;
   }
 }
@@ -429,12 +429,12 @@ enable_page_level_ads: true
  * Implement hook_ranking()
  */
 function etype_ranking() {
-  return array(
-    'node_created_date' => array(
+  return [
+    'node_created_date' => [
       'title' => t('Node Published Date'),
       'score' => 'n.created',
-    ),
-  );
+    ],
+  ];
 }
 
 /**
