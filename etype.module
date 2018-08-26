@@ -105,7 +105,15 @@ function etype_node_cleanup() {
  * @return mixed
  */
 function etype_cronapi($op, $job = NULL) {
-  $cron_schedule = variable_get('etype_classified_cron');
+  $cron_schedule = variable_get('etype_e_edition', '');
+  if (empty ($cron_schedule)) {
+    $etype_site_path = _etype_site_path();
+    $settings_file = $etype_site_path . '/etype_settings.php';
+    if (file_exists($settings_file)) {
+      include($etype_site_path . '/etype_settings.php');
+    }
+  }
+
   if (!empty($cron_schedule)) {
     /* Classified importer */
     $items['etype_classified_cron'] = [
@@ -124,9 +132,18 @@ function etype_cronapi($op, $job = NULL) {
  */
 function etype_classfied_mapping($vid) {
 
-  $categories = []; // set in include file, just to avoid IDE errors
-  $etype_site_path = _etype_site_path();
-  include($etype_site_path . '/etype_settings.php');
+  $cats = variable_get('etype_classified_map');
+  $categories = [];
+  if (empty ($cats)) {
+    $etype_site_path = _etype_site_path();
+    include($etype_site_path . '/etype_settings.php');
+  } else {
+    foreach (explode(PHP_EOL, $cats) as $item) {
+      $arr = explode('|', $item);
+      $categories[$arr[0]] = $arr[1];
+    }
+  }
+
 
   if (!isset($vid)) {
     watchdog('etype', "No category id for item", $variables = [], $severity = WATCHDOG_ERROR);
@@ -187,80 +204,79 @@ function etype_entity_create($item = [], $values = [], $entity_type = 'node') {
 function etype_classified_ad_importer() {
 
   global $user;
-  $url = ''; // set in include file, just to avoid IDE errors
-  $etype_site_path = _etype_site_path();
-  $settings_file = $etype_site_path . '/etype_settings.php';
+  $url = variable_get('etype_classified_import_url', '');
+  if (empty($url)) {
+    $etype_site_path = _etype_site_path();
+    $settings_file = $etype_site_path . '/etype_settings.php';
+    if (file_exists($settings_file)) {
+      include($etype_site_path . '/etype_settings.php');
+    }
+  }
 
-  if (file_exists($settings_file)) {
+  if (!empty($url)) {
 
-    include($etype_site_path . '/etype_settings.php');
+    $values = [
+      'type' => 'classified',
+      'uid' => $user->uid,
+      'status' => 1,
+      'comment' => 0,
+      'promote' => 0,
+      'language' => LANGUAGE_NONE,
+    ];
 
-    if (!empty($url)) {
+    $xml = file_get_contents($url);
+    if ($xml !== FALSE) {
 
-      $values = [
-        'type' => 'classified',
-        'uid' => $user->uid,
-        'status' => 1,
-        'comment' => 0,
-        'promote' => 0,
-        'language' => LANGUAGE_NONE,
-      ];
+      $ad_obj = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+      $i = 0;
+      if (count($ad_obj) > 0) {
 
-      $xml = file_get_contents($url);
-      if ($xml !== FALSE) {
+        /* delete all current ads */
+        $query = new EntityFieldQuery();
+        $query->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', 'classified');
+        $result = $query->execute();
+        // dpq($query);
+        if (count($result) > 0) {
+          $nids = array_keys($result['node']);
+          $i = count($nids);
+          node_delete_multiple($nids);
+          watchdog('etype', "EType Classified Importer deleted %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
+          // drupal_set_message(t("EType Classified Importer deleted $i expired nodes"), 'status');
+        } else {
+          watchdog('etype', "EType Classified Importer found no Classified Ads to delete", $variables = [], $severity = WATCHDOG_NOTICE);
+        }
 
-        $ad_obj = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
         $i = 0;
-        if (count($ad_obj) > 0) {
+        /* loop over xml and add new Classified Ads */
+        foreach ($ad_obj as $ad) {
 
-          /* delete all current ads */
-          $query = new EntityFieldQuery();
-          $query->entityCondition('entity_type', 'node')
-            ->entityCondition('bundle', 'classified');
-          $result = $query->execute();
-          // dpq($query);
-          if (count($result) > 0) {
-            $nids = array_keys($result['node']);
-            $i = count($nids);
-            node_delete_multiple($nids);
-            watchdog('etype', "EType Classified Importer deleted %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
-            // drupal_set_message(t("EType Classified Importer deleted $i expired nodes"), 'status');
-          } else {
-            watchdog('etype', "EType Classified Importer found no Classified Ads to delete", $variables = [], $severity = WATCHDOG_NOTICE);
+          // xml object processing to make array
+          $array = [];
+          foreach ($ad as $k => $v) {
+            $v = (array) $v;
+            isset($v[0]) ? $array[$k] = $v[0] : $array[$k] = '';
           }
 
-          $i = 0;
-          /* loop over xml and add new Classified Ads */
-          foreach ($ad_obj as $ad) {
-
-            // xml object processing to make array
-            $array = [];
-            foreach ($ad as $k => $v) {
-              $v = (array) $v;
-              isset($v[0]) ? $array[$k] = $v[0] : $array[$k] = '';
-            }
-
-            /* check for valid matched category, otherwise there will be an error in node creation */
-            $category = etype_classfied_mapping($array['categoryId']);
-            if ($category > 0) {
-              $node = [
-                'title' => $array['ItemTitle'],
-                'body' => $array['ItemDesc'],
-                'category' => etype_classfied_mapping($array['categoryId']),
-              ];
-              // print_r($node);
-              $values['created'] = strtotime($array['startDate']);
-              etype_entity_create($node, $values);
-              $i++;
-            }
+          /* check for valid matched category, otherwise there will be an error in node creation */
+          $category = etype_classfied_mapping($array['categoryId']);
+          if ($category > 0) {
+            $node = [
+              'title' => $array['ItemTitle'],
+              'body' => $array['ItemDesc'],
+              'category' => etype_classfied_mapping($array['categoryId']),
+            ];
+            // print_r($node);
+            $values['created'] = strtotime($array['startDate']);
+            etype_entity_create($node, $values);
+            $i++;
           }
         }
-        watchdog('etype', "EType Classified Importer added %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
-        // drupal_set_message(t("EType Classified Importer added $i nodes"), 'status');
-      } else {
-        watchdog('etype', "EType Classified Importer found no xml at %url", $variables = ['%url' => $url], $severity = WATCHDOG_NOTICE);
       }
-
+      watchdog('etype', "EType Classified Importer added %num Classified Ads", $variables = ['%num' => $i], $severity = WATCHDOG_NOTICE);
+      // drupal_set_message(t("EType Classified Importer added $i nodes"), 'status');
+    } else {
+      watchdog('etype', "EType Classified Importer found no xml at %url", $variables = ['%url' => $url], $severity = WATCHDOG_NOTICE);
     }
 
   }
@@ -312,13 +328,22 @@ function etype_premium_access(&$node, $teaser = NULL) {
  */
 function etype_e_editions() {
   $uid = user_is_logged_in();
-  $e_edition = empty(theme_get_setting('e_edition')) ? variable_get('etype_e_edition') : theme_get_setting('e_edition');
-  $pub = empty(theme_get_setting('pub')) ? variable_get('etype_pub') : theme_get_setting('pub');
-  $ptype = empty(theme_get_setting('ptype')) ? variable_get('etype_ptype') : theme_get_setting('ptype');
+  $e_edition = empty(theme_get_setting('e_edition'))? variable_get('etype_e_edition'): theme_get_setting('e_edition');
+  $pub = empty(theme_get_setting('pub'))? variable_get('etype_pub'): theme_get_setting('pub');
+  $ptype = empty(theme_get_setting('ptype'))? variable_get('etype_ptype'): theme_get_setting('ptype');
   $site = variable_get('site_name', 'Drupal');
-  $items = explode(',', $e_edition);
-  $pubs = explode(',', $pub);
-  $ptypes = explode(',', $ptype);
+
+  /* because Lutcher has a comma */
+  if (strpos($e_edition, '|') !== false) {
+    $items = explode(',', $e_edition);
+    $pubs = explode(',', $pub);
+    $ptypes = explode(',', $ptype);
+  } else {
+    $items = [$e_edition];
+    $pubs = [$pub];
+    $ptypes = [$ptype];
+  }
+
   $e_editions = [];
   $ptr = 0;
   foreach ($items as $item) {
@@ -404,12 +429,12 @@ enable_page_level_ads: true
  * Implement hook_ranking()
  */
 function etype_ranking() {
-  return array(
-    'node_created_date' => array(
+  return [
+    'node_created_date' => [
       'title' => t('Node Published Date'),
       'score' => 'n.created',
-    ),
-  );
+    ],
+  ];
 }
 
 /**

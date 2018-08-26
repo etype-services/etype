@@ -38,14 +38,6 @@ function etype_admin() {
     '#default_value' => variable_get('etype_ptype'),
   ];
 
-  $form['e_edition']['etype_classified_cron'] = array(
-    '#type' => 'textfield',
-    '#title' => t('eType Classified Import Schedule'),
-    '#description' => t('Use crontab syntax'),
-    '#size' => 55,
-    '#default_value' => variable_get('etype_classified_cron'),
-  );
-
   /* facebook */
   $form['facebook'] = [
     '#type' => 'fieldset',
@@ -308,7 +300,7 @@ function etype_admin() {
   ];
 
 
-  /* Google identifiers */
+  /* Google Identifiers */
   $form['etype_google'] = [
     '#type' => 'fieldset',
     '#title' => t('Google'),
@@ -348,6 +340,35 @@ function etype_admin() {
     '#description' => t('Inserted at the end of &lt;body&gt; area'),
     '#size' => 55,
     '#default_value' => variable_get('etype_body_script', ''),
+  ];
+
+  /* Classified Ads Import */
+  $form['etype_classified'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Classified Ads Import Settings'),
+  ];
+
+  $form['etype_classified']['etype_classified_import_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('eType Classified Import URL'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_classified_import_url'),
+  );
+
+  $form['etype_classified']['etype_classified_cron'] = array(
+    '#type' => 'textfield',
+    '#title' => t('eType Classified Import Schedule'),
+    '#description' => t('Use crontab syntax'),
+    '#size' => 55,
+    '#default_value' => variable_get('etype_classified_cron'),
+  );
+
+  $form['etype_classified']['etype_classified_map'] = [
+    '#type' => 'textarea',
+    '#title' => t('eType Classified Mapping'),
+    '#description' => t('Enter VDATA Category Id and matching <a href="/admin/structure/taxonomy/classified_categories" target="_blank">Classified Ad term id</a> on one line, e.g C101|123'),
+    '#size' => 101,
+    '#default_value' => variable_get('etype_classified_map'),
   ];
 
   return system_settings_form($form);
