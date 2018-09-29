@@ -2,4 +2,7 @@
   display: flex;
   justify-content: space-around; }
 
+#block-etype-follow .content div {
+  white-space: nowrap; }
+
 /*# sourceMappingURL=etype.css.map */
