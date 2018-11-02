@@ -105,7 +105,7 @@ function etype_node_cleanup() {
  * @return mixed
  */
 function etype_cronapi($op, $job = NULL) {
-  $cron_schedule = variable_get('etype_e_edition', '');
+  $cron_schedule = variable_get('etype_classified_cron', '');
   if (empty ($cron_schedule)) {
     $etype_site_path = _etype_site_path();
     $settings_file = $etype_site_path . '/etype_settings.php';
