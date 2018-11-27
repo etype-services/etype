@@ -467,3 +467,12 @@ function etype_user_login(&$edit, $account) {
   setcookie('etype-logged-in', '1', 0, '/');
 }
 
+/**
+ * Implements hook_user_logout().
+ */
+function etype_user_logout($account) {
+  // Set cookie in the past and then remove it.
+  setcookie('etype-logged-in', '', REQUEST_TIME - 3600, '/');
+  unset($_COOKIE['etype-logged-in']);
+}
+
