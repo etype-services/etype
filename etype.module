@@ -464,7 +464,7 @@ function etype_preprocess_search_results(&$vars) {
  * Set cookie by role for caching
  */
 function etype_user_login(&$edit, $account) {
-  setcookie('etype-logged-in', '1', 0, '/');
+  setcookie('nocache', '1', 0, '/');
 }
 
 /**
@@ -472,7 +472,7 @@ function etype_user_login(&$edit, $account) {
  */
 function etype_user_logout($account) {
   // Set cookie in the past and then remove it.
-  setcookie('etype-logged-in', '', REQUEST_TIME - 3600, '/');
-  unset($_COOKIE['etype-logged-in']);
+  setcookie('nocache', '', REQUEST_TIME - 3600, '/');
+  unset($_COOKIE['nocache']);
 }
 
