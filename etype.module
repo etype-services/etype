@@ -439,10 +439,10 @@ function etype_ranking() {
 
 /**
  * Implement hook_preprocess_search_results()
+ * To order search results by time (not 'relevance')
  */
 function etype_preprocess_search_results(&$vars) {
   $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
-  // dsm($results);
   usort($results, function ($v1, $v2) {
     return $v2['node']->created - $v1['node']->created; // sort by updated time, DESC order
   });
@@ -453,9 +453,17 @@ function etype_preprocess_search_results(&$vars) {
     $output_results[] = $value;
     $value = '';
   } // store all results into an array
-  #dsm($output_results);
   $output = implode(" ", $output_results) . "<br>"; // convert array to string
   $vars['search_results'] = $output;
-  #dsm($vars);
+}
+
+/**
+ * Implements hook_user_login()
+ * @param $edit
+ * @param $account
+ * Set cookie by role for caching
+ */
+function etype_user_login(&$edit, $account) {
+  setcookie('etype-logged-in', '1', 0, '/');
 }
 
