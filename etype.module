@@ -399,7 +399,7 @@ function etype_preprocess_html(&$variables) {
   $fontawesome = [
     '#type' => 'markup',
     '#markup' => '
-<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 ',
   ];
   drupal_add_html_head($fontawesome, 'etype_fontawesome');
@@ -439,10 +439,10 @@ function etype_ranking() {
 
 /**
  * Implement hook_preprocess_search_results()
+ * To order search results by time (not 'relevance')
  */
 function etype_preprocess_search_results(&$vars) {
   $results = $vars['results'];// via dsm (Devel module), we can see node creation time is available under the 'results' array
-  // dsm($results);
   usort($results, function ($v1, $v2) {
     return $v2['node']->created - $v1['node']->created; // sort by updated time, DESC order
   });
@@ -453,9 +453,33 @@ function etype_preprocess_search_results(&$vars) {
     $output_results[] = $value;
     $value = '';
   } // store all results into an array
-  #dsm($output_results);
   $output = implode(" ", $output_results) . "<br>"; // convert array to string
   $vars['search_results'] = $output;
-  #dsm($vars);
+}
+
+/**
+ * Implements hook_user_login()
+ * @param $edit
+ * @param $account
+ * Set cookie by role for caching
+ */
+function etype_user_login(&$edit, $account) {
+  function in_array_any($needles, $haystack) {
+    return (bool)(array_intersect($needles, $haystack));
+  }
+  $check = in_array_any(['administrator', 'Editor', 'editor'], $account->roles);
+  if ($check == 1) {
+    setcookie('nocache', '1', 0, '/');
+  }
+}
+
+/**
+ * Implements hook_user_logout().
+ * Remove nocache cookie
+ */
+function etype_user_logout($account) {
+  // Set cookie in the past and then remove it.
+  setcookie('nocache', '', REQUEST_TIME - 3600, '/');
+  unset($_COOKIE['nocache']);
 }
 
