@@ -465,6 +465,7 @@ function etype_preprocess_search_results(&$vars) {
  */
 function etype_user_login(&$edit, $account) {
   var_dump($account->roles);
+  exit;
   function in_array_any($needles, $haystack) {
     return (bool)(array_intersect($needles, $haystack));
   }
