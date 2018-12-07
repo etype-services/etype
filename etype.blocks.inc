@@ -345,6 +345,7 @@ function _etype_contact_follow_content() {
 
 /**
  * eType User Menu
+ * Not used, I do not think, but let's leave for now
  */
 function _etype_menu_content() {
   global $user;
