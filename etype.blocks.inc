@@ -25,7 +25,7 @@ function etype_block_info() {
   ];
 
   $blocks['etype-user-menu'] = [
-    'info' => t('eType User Menu'),
+    'info' => t('eType User Menu (deprecated)'),
   ];
 
   $blocks['etype-facebook-feed'] = [
