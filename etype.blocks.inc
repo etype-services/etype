@@ -24,10 +24,6 @@ function etype_block_info() {
     'info' => t('eType Contact Page Follow'),
   ];
 
-  $blocks['etype-user-menu'] = [
-    'info' => t('eType User Menu (deprecated)'),
-  ];
-
   $blocks['etype-facebook-feed'] = [
     'info' => t('eType Facebook Feed'),
   ];
@@ -64,11 +60,6 @@ function etype_block_view($delta = '') {
     case 'contact-page-follow':
       $block['subject'] = '';
       $block['content'] = _etype_contact_follow_content();
-      break;
-
-    case 'etype-user-menu':
-      $block['subject'] = '';
-      $block['content'] = _etype_menu_content();
       break;
 
     case 'etype-facebook-feed':
@@ -341,30 +332,6 @@ function _etype_contact_follow_content() {
 
   return $output;
 
-}
-
-/**
- * eType User Menu
- * Not used, I do not think, but let's leave for now
- */
-function _etype_menu_content() {
-  global $user;
-  $output = "<ul class=\"user-menu menu\">";
-  if($user ->uid != 0) {
-    $username= $user ->name;
-    $pub_id = variable_get('etype_pub');
-    $ptype = variable_get('etype_ptype');
-    $output .= "<li><a 
-href=\"https://www.etypeservices.com/ReadTheEdition.aspx?Username=$username&Pub=$pub_id&PType=$ptype\"  title=\"\" target=\"_blank\">e-Edition</a></li>";
-    $output .= "<li><a href=\"/content/my-account\" title=\"\">My account</a></li>";
-    $output .= "<li><a href=\"/user/logout\" title=\"\">Log out</a></li>";
-  } else {
-    $e_edition =  variable_get('etype_e_edition');
-    $output .= "<li><a href=\"/content/custom-login-page\" title=\"\">Login</a></li><li><a 
-href=\"https://www.etypeservices.com/$e_edition/\" title=\"\">Subscribe</a></li>";
-  }
-  $output .= "</ul>";
-  return $output;
 }
 
 /**
