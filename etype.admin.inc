@@ -59,7 +59,7 @@ function etype_admin() {
 
   $form['facebook']['etype_facebook_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_facebook_footer', 0),
   ];
 
@@ -92,7 +92,7 @@ function etype_admin() {
 
   $form['twitter']['etype_twitter_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_twitter_footer', 0),
   ];
 
@@ -124,7 +124,7 @@ function etype_admin() {
 
   $form['googleplus']['etype_googleplus_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_googleplus_footer', 0),
   ];
 
@@ -156,7 +156,7 @@ function etype_admin() {
 
   $form['youtube']['etype_youtube_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_youtube_footer', 0),
   ];
 
@@ -188,7 +188,7 @@ function etype_admin() {
 
   $form['instagram']['etype_instagram_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_instagram_footer', 0),
   ];
 
@@ -220,7 +220,7 @@ function etype_admin() {
 
   $form['pinterest']['etype_pinterest_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_pinterest_footer', 0),
   ];
 
@@ -252,7 +252,7 @@ function etype_admin() {
 
   $form['vimeo']['etype_vimeo_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_vimeo_footer', 0),
   ];
 
@@ -276,7 +276,7 @@ function etype_admin() {
 
   $form['rss']['etype_rss_footer'] = [
     '#type' => 'checkbox',
-    '#title' => t('Add link to footer area (News+ theme only)'),
+    '#title' => t('Add link to footer area'),
     '#default_value' => variable_get('etype_rss_footer', 0),
   ];
 
