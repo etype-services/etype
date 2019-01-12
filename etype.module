@@ -467,9 +467,14 @@ function etype_user_login(&$edit, $account) {
   function in_array_any($needles, $haystack) {
     return (bool)(array_intersect($needles, $haystack));
   }
-  $check = in_array_any(['administrator', 'Editor', 'editor', 'authenticated user'], $account->roles);
+  $check = in_array_any(['administrator'], $account->roles);
   if ($check == 1) {
     setcookie('nocache', '1', 0, '/');
+  } else {
+    $check = in_array_any(['Editor', 'editor', 'authenticated user'], $account->roles);
+    if ($check == 1) {
+      setcookie('nocache', '2', 0, '/');
+    }
   }
 }
 
