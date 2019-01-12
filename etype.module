@@ -461,7 +461,7 @@ function etype_preprocess_search_results(&$vars) {
  * Implements hook_user_login()
  * @param $edit
  * @param $account
- * Set cookie by role for caching
+ * Set cookie by role for caching/proxy serving
  */
 function etype_user_login(&$edit, $account) {
   function in_array_any($needles, $haystack) {
