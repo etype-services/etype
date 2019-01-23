@@ -464,6 +464,7 @@ function etype_preprocess_search_results(&$vars) {
  * Set cookie by role for caching/proxy serving
  */
 function etype_user_login(&$edit, $account) {
+  var_dump($account->roles);
   function in_array_any($needles, $haystack) {
     return (bool)(array_intersect($needles, $haystack));
   }
