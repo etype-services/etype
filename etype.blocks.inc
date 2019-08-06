@@ -178,7 +178,9 @@ function _etype_e_edition_content() {
   $output = '';
   foreach($e_editions as $e_edition) {
     $output .= '
-<p class="rtecenter"><a href="' . $e_edition['path'] . '"><img src="' . $e_edition['image'] . '"></a></p><h4 class="rtecenter"><a href="' . $e_edition['path'] . '">Click here to read ' . $e_edition['site_name'] . '</a></h4>
+<p class="rtecenter"><a href="' . $e_edition['path'] . '"><img src="' . $e_edition['image'] . '" alt="' . $e_edition['site_name'] . ' e-Edition" /></a></p><h4 class="rtecenter"><a href="' .
+      $e_edition['path'] . '">Click here to read ' .
+      $e_edition['site_name'] . '</a></h4>
 ';
   }
   return $output;
