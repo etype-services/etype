@@ -80,7 +80,7 @@ function _etype_e_edition_content() {
   $output = '';
   foreach ($e_editions as $e_edition) {
     $output .= '
-<p><a href="' . $e_edition['path'] . '"><img src="' . $e_edition['image'] . '"></a></p>
+<p><a href="' . $e_edition['path'] . '"><img src="' . $e_edition['image'] . '" alt="' . $e_edition['site_name'] . '"></a></p>
 <p><a href="' . $e_edition['path'] . '">Click here to read ' . $e_edition['site_name'] . '</a></p>
 ';
   }
