@@ -490,7 +490,7 @@ function etype_user_logout($account) {
 
 /**
  * For ADA compliance, make sure images have alt & title tag.
- * @param $vars
+ * @param $variables
  */
 function etype_preprocess_image(&$variables) {
   if (empty($variables['alt'])) {
