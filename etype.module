@@ -488,3 +488,19 @@ function etype_user_logout($account) {
   unset($_COOKIE['nocache']);
 }
 
+/**
+ * For ADA compliance, make sure images have alt & title tag.
+ * @param $vars
+ */
+function etype_preprocess_image(&$vars) {
+  // alt
+  if (empty($vars['attributes']['alt'])) {
+    $vars['attributes']['alt'] = "Article Image (Alt Text)";
+  }
+
+  // title
+  if (empty($vars['attributes']['title'])) {
+    $vars['attributes']['title'] = "Article Image (Title)";
+  }
+}
+
