@@ -492,7 +492,9 @@ function etype_user_logout($account) {
  * For ADA compliance, make sure images have alt & title tag.
  * @param $vars
  */
-function etype_preprocess_image(&$vars) {
-  dpm($vars);
+function etype_preprocess_image(&$variables) {
+  if (empty($variables['alt'])) {
+    $variables['alt'] = "Article Image Alt Text"
+  }
 }
 
