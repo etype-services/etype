@@ -496,5 +496,8 @@ function etype_preprocess_image(&$variables) {
   if (empty($variables['alt'])) {
     $variables['alt'] = "Article Image Alt Text";
   }
+  if (empty($variables['title'])) {
+    $variables['alt'] = "Article Image Title Text";
+  }
 }
 
