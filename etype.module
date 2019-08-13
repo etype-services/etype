@@ -493,14 +493,5 @@ function etype_user_logout($account) {
  * @param $vars
  */
 function etype_preprocess_image(&$vars) {
-  // alt
-  if (empty($vars['attributes']['alt'])) {
-    $vars['attributes']['alt'] = "Article Image (Alt Text)";
-  }
-
-  // title
-  if (empty($vars['attributes']['title'])) {
-    $vars['attributes']['title'] = "Article Image (Title)";
-  }
 }
 
