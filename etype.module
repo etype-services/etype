@@ -513,7 +513,6 @@ function etype_preprocess_image(&$variables) {
  */
 function _etype_ada_compliance() {
   $page = [
-    '#theme' => 'page',
     '#type' => 'page',
     '#title' => 'Americans with Disabilities Act Compliance Statement',
     'content' => [
