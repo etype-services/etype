@@ -516,7 +516,7 @@ function etype_theme() {
   return [
     'ada_compliance' => [
       'path' =>  drupal_get_path('module', 'etype'),
-      'template' => 'ada-compliance',
+      'template' => 'templates/ada-compliance',
     ],
   ];
 }
