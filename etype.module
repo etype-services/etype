@@ -512,11 +512,12 @@ function etype_preprocess_image(&$variables) {
  * ADA Compliance Page
  */
 function _etype_ada_compliance() {
-  $content['raw_markup'] = array(
+  $page = [
     '#theme' => 'page',
     '#type' => 'page',
     '#title' => 'Americans with Disabilities Act Compliance Statement',
-    '#markup' => '<p>We firmly believe that the internet should be available and accessible to anyone, and we are
+    'content' => [
+      'system_main' => ['<p>We firmly believe that the internet should be available and accessible to anyone, and we are
         committed to providing a website that is accessible to the widest possible audience, regardless of
         circumstance and ability.</p>
     <p>To fulfill this goal, we aim to adhere as closely as possible to the Web
@@ -536,9 +537,10 @@ function _etype_ada_compliance() {
     <p>If you have discovered a page or element that does not allow access or have ideas that might
         help us improve access to the site, we would be happy to hear from you. Simply click the Contact
         button at the bottom of the site. You can send an email to the web team by <a
-                href="mailto:support@etypeservices.com">clicking this link</a>.</p>',
-  );
+                href="mailto:support@etypeservices.com">clicking this link</a>.</p>']
+    ]
+  ];
 
-  return $content;
+  return $page;
 }
 
