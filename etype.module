@@ -513,7 +513,8 @@ function etype_preprocess_image(&$variables) {
  */
 function _etype_ada_compliance() {
   $content['raw_markup'] = array(
-    '#type' => 'markup',
+    '#theme' => 'page',
+    '#type' => 'page',
     '#title' => 'Americans with Disabilities Act Compliance Statement',
     '#markup' => '<p>We firmly believe that the internet should be available and accessible to anyone, and we are
         committed to providing a website that is accessible to the widest possible audience, regardless of
