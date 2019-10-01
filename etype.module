@@ -529,7 +529,3 @@ function etype_theme() {
 function _etype_ada_compliance() {
   return theme('ada_compliance');
 }
-
-function etype_menu_alter(&$items) {
-  $items['ada-compliance']['title'] = 'ADA';
-}
