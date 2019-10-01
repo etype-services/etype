@@ -535,6 +535,7 @@ function _etype_ada_compliance() {
  * ADA Compliance Page
  */
 function etype_preprocess_page(&$vars) {
+  var_dump($vars);
   if ($vars['title'] == 'ADA') {
     $vars['title'] = "Americans with Disabilities Act Compliance Statement";
   }
