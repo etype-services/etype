@@ -512,12 +512,13 @@ function etype_preprocess_image(&$variables) {
 /**
  * @return array
  */
-function etype_theme(){
-  return array(
+function etype_theme() {
+  return [
     'ada_compliance' => [
+      'path' =>  drupal_get_path('module', 'etype'),
       'template' => 'ada-compliance',
     ],
-  );
+  ];
 }
 
 
