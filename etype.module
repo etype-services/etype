@@ -511,6 +511,7 @@ function etype_preprocess_image(&$variables) {
 
 /**
  * @return array
+ * ADA Compliance Page
  */
 function etype_theme() {
   return [
@@ -527,4 +528,13 @@ function etype_theme() {
  */
 function _etype_ada_compliance() {
   return theme('ada_compliance');
+}
+
+/**
+ * ADA Compliance Page
+ */
+function etype_preprocess_page(&$variables) {
+  if ($variables['title'] == 'ADA') {
+    $variables['title'] = "Americans with Disabilities Act Compliance Statement";
+  }
 }

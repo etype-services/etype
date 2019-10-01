@@ -1,4 +1,4 @@
-<h1>Americans with Disabilities Act Compliance Statement</h1><p>We firmly believe that the internet should be available and accessible to anyone, and we are
+<p>We firmly believe that the internet should be available and accessible to anyone, and we are
   committed to providing a website that is accessible to the widest possible audience, regardless of
   circumstance and ability.</p>
 <p>To fulfill this goal, we aim to adhere as closely as possible to the Web
