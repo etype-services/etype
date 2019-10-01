@@ -531,9 +531,11 @@ function _etype_ada_compliance() {
 }
 
 /**
+ * @param $variables
  * ADA Compliance Page
  */
 function etype_preprocess_page(&$variables) {
+  echo $variables['title'];
   if ($variables['title'] == 'ADA') {
     $variables['title'] = "Americans with Disabilities Act Compliance Statement";
   }
