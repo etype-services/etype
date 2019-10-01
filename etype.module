@@ -529,13 +529,3 @@ function etype_theme() {
 function _etype_ada_compliance() {
   return theme('ada_compliance');
 }
-
-/**
- * @param $vars
- * ADA Compliance Page
- */
-function etype_preprocess_page(&$vars) {
-  if ($vars['title'] == 'ADA') {
-    drupal_set_title("Americans with Disabilities Act Compliance Statement");
-  }
-}
