@@ -536,6 +536,6 @@ function _etype_ada_compliance() {
  */
 function etype_preprocess_page(&$vars) {
   if ($vars['#title'] == 'ADA') {
-    $vars['#title'] = "Americans with Disabilities Act Compliance Statement";
+    $vars['title'] = "Americans with Disabilities Act Compliance Statement";
   }
 }
