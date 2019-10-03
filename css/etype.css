@@ -5,4 +5,15 @@
 #block-etype-follow .content div {
   white-space: nowrap; }
 
+/* see https://getbootstrap.com/docs/3.4/css/ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
 /*# sourceMappingURL=etype.css.map */

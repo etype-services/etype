@@ -25,6 +25,16 @@ function etype_menu() {
     'type' => MENU_NORMAL_ITEM,
   ];
 
+  /* ADA Compliance */
+  $items['ada-compliance'] = [
+    'title' => 'ADA',
+    'description' => 'Americans with Disabilities Act Compliance Statement',
+    'page callback' => '_etype_ada_compliance',
+    'access arguments' => ['access content'],
+    'menu_name' => 'user-menu',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
   $items['etype-classified-import'] = [
     'title' => t('Import Classified Ads'),
     'page callback' => 'etype_classified_ad_importer',
@@ -461,15 +471,20 @@ function etype_preprocess_search_results(&$vars) {
  * Implements hook_user_login()
  * @param $edit
  * @param $account
- * Set cookie by role for caching
+ * Set cookie by role for caching/proxy serving
  */
 function etype_user_login(&$edit, $account) {
   function in_array_any($needles, $haystack) {
     return (bool)(array_intersect($needles, $haystack));
   }
-  $check = in_array_any(['administrator', 'Editor', 'editor', 'authenticated user'], $account->roles);
+  $check = in_array_any(['administrator', 'Editor', 'editor', 'Reporter'], $account->roles);
   if ($check == 1) {
     setcookie('nocache', '1', 0, '/');
+  } else {
+    $check = in_array_any(['authenticated user'], $account->roles);
+    if ($check == 1) {
+      setcookie('nocache', '2', 0, '/');
+    }
   }
 }
 
@@ -484,15 +499,33 @@ function etype_user_logout($account) {
 }
 
 /**
- * For ADA compliance, make sure images have alt & title tag.
+ * For ADA compliance, make sure images have alt tag.
  * @param $variables
  */
 function etype_preprocess_image(&$variables) {
   if (empty($variables['alt'])) {
     $variables['alt'] = "Article Image Alt Text";
   }
-  //if (empty($variables['title'])) {
-  //  $variables['title'] = "Article Image Title Text";
-  //}
 }
 
+
+/**
+ * @return array
+ * ADA Compliance Page
+ */
+function etype_theme() {
+  return [
+    'ada_compliance' => [
+      'path' =>  drupal_get_path('module', 'etype'),
+      'template' => 'templates/ada-compliance',
+    ],
+  ];
+}
+
+
+/**
+ * ADA Compliance Page
+ */
+function _etype_ada_compliance() {
+  return theme('ada_compliance');
+}
