@@ -27,7 +27,7 @@ function etype_menu() {
 
   /* ADA Compliance */
   $items['ada-compliance'] = [
-    'title' => 'ADA',
+    'title' => 'Accessibility Policy',
     'description' => 'Americans with Disabilities Act Compliance Statement',
     'page callback' => '_etype_ada_compliance',
     'access arguments' => ['access content'],
