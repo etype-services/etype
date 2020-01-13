@@ -535,5 +535,5 @@ function _etype_ada_compliance() {
  */
 if (module_exists('pwa')) {
   $path = variable_get('file_public_path', conf_path() . '/files');
-  echo $path;
+  //echo $path; sites/gunnisontimes.etypegoogle10.com/files
 }
