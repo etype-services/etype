@@ -535,8 +535,10 @@ function _etype_ada_compliance() {
  */
 if (module_exists('pwa')) {
 
+  drupal_add_css(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.css');
+  drupal_add_js(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.js');
+
   /**
-   * @file
    * Hooks provided by the Progressive Web App module.
    */
 
