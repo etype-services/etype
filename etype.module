@@ -535,6 +535,8 @@ function _etype_ada_compliance() {
  */
 if (module_exists('pwa')) {
 
+  $path = variable_get('file_public_path', conf_path() . '/files');
+  echo url($path . '/assets/logo-512.png');
   /**
    * @file
    * Hooks provided by the Progressive Web App module.
@@ -562,7 +564,6 @@ if (module_exists('pwa')) {
 
     // Get file path
     $path = variable_get('file_public_path', conf_path() . '/files');
-    echo url($path . '/assets/logo-512.png');
 
     // Change a string-based property.
     $manifest['name'] = variable_get('pwa_name', variable_get('site_name'));
