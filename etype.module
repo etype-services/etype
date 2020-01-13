@@ -535,8 +535,6 @@ function _etype_ada_compliance() {
  */
 if (module_exists('pwa')) {
 
-  $path = variable_get('file_public_path', conf_path() . '/files');
-  echo url($path . '/assets/logo-512.png');
   /**
    * @file
    * Hooks provided by the Progressive Web App module.
@@ -573,22 +571,22 @@ if (module_exists('pwa')) {
     // listed here to meet criteria for "Add to Homescreen"
     $manifest['icons'] = [
       [
-        'src' => url($path . '/assets/logo-512.png'),
+        'src' => url($path . '/assets/icon-512.png'),
         'sizes' => '512x512',
         'type' => 'image/png',
       ],
       [
-        'src' => url($path . '/assets/logo-192.png'),
+        'src' => url($path . '/assets/icon-192.png'),
         'sizes' => '192x192',
         'type' => 'image/png',
       ],
       [
-        'src' => url($path . '/assets/logo-144.png'),
+        'src' => url($path . '/assets/icon-144.png'),
         'sizes' => '144x144',
         'type' => 'image/png',
       ],
       [
-        'src' => url($path . '/assets/logo.svg'),
+        'src' => url($path . '/assets/icon-vector.svg'),
         'type' => 'image/svg+xml',
       ],
     ];
