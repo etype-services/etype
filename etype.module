@@ -529,3 +529,11 @@ function etype_theme() {
 function _etype_ada_compliance() {
   return theme('ada_compliance');
 }
+
+/**
+ * PWA
+ */
+if (module_exists('pwa')) {
+  $path = variable_get('file_public_path', conf_path() . '/files');
+  echo $path;
+}
