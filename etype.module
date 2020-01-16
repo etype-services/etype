@@ -432,6 +432,8 @@ enable_page_level_ads: true
 
   drupal_add_css(drupal_get_path('module', 'etype') . '/css/etype.css');
   drupal_add_js(drupal_get_path('module', 'etype') . '/js/etype.js');
+  drupal_add_css(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.css');
+  drupal_add_js(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.js');
   $variables['classes_array'][] = _etype_get_site_identifier();
 }
 
@@ -534,9 +536,6 @@ function _etype_ada_compliance() {
  * PWA
  */
 if (module_exists('pwa')) {
-
-  drupal_add_css(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.css');
-  drupal_add_js(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.js');
 
   /**
    * Hooks provided by the Progressive Web App module.
