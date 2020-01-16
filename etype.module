@@ -407,7 +407,7 @@ function _etype_get_site_identifier() {
 /**
  * Implements hook_process_html().
  *
- * Add scripts on overall the site which are defined on the settings page.
+ * Add script to fire iOS add to home screen
  */
 function etype_process_html(&$variables) {
   if (module_exists('pwa')) {
