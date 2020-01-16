@@ -405,8 +405,20 @@ function _etype_get_site_identifier() {
 }
 
 /**
+ * Implements hook_process_html().
+ *
+ * Add scripts on overall the site which are defined on the settings page.
+ */
+function etype_process_html(&$variables) {
+  if (module_exists('pwa')) {
+    $variables['page_top'] .= '<script type="text/javascript">addToHomescreen()</script' .
+      PHP_EOL;
+  }
+}
+
+/**
  * @param $variables
- * Add fontawesome script
+ * Add fontawesome script, pwa scripts for iOS
  */
 function etype_preprocess_html(&$variables) {
   $fontawesome = [
@@ -442,7 +454,6 @@ enable_page_level_ads: true
     /* Add iOS code and icons */
     drupal_add_css(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.css');
     drupal_add_js(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.js');
-    $variables['page_top'] .= '<script>addToHomescreen();</script>' . PHP_EOL;
     drupal_add_html_head_link([
       'rel' => 'apple-touch-icon',
       'href' => $path . '/assets/icon-144.png',
