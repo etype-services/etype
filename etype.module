@@ -109,33 +109,6 @@ function etype_node_cleanup() {
 }
 
 /**
- * Cron Jobs
- * @param $op
- * @param null $job
- * @return mixed
- */
-function etype_cronapi($op, $job = NULL) {
-  $cron_schedule = variable_get('etype_classified_cron', '');
-  if (empty ($cron_schedule)) {
-    $etype_site_path = _etype_site_path();
-    $settings_file = $etype_site_path . '/etype_settings.php';
-    if (file_exists($settings_file)) {
-      include($etype_site_path . '/etype_settings.php');
-    }
-  }
-
-  if (!empty($cron_schedule)) {
-    /* Classified importer */
-    $items['etype_classified_cron'] = [
-      'description' => 'Import Classified Ads',
-      'rule' => $cron_schedule,
-      'callback' => 'etype_classified_ad_importer',
-    ];
-    return $items;
-  }
-}
-
-/**
  * @param $vid
  * @return int|mixed|void
  * Map xml classified categories to Drupal taxonomy items
@@ -179,6 +152,7 @@ function etype_classfied_mapping($vid) {
 
 /**
  * Create Entity
+ *
  * @param array $item
  * @param array $values
  * @param string $entity_type
@@ -334,7 +308,6 @@ function etype_premium_access(&$node, $teaser = NULL) {
 
 /**
  * Parse e-Edition settings into an array for use in other functions
- * @return array
  */
 function etype_e_editions() {
   $uid = user_is_logged_in();
@@ -342,19 +315,10 @@ function etype_e_editions() {
   $pub = empty(theme_get_setting('pub'))? variable_get('etype_pub'): theme_get_setting('pub');
   $ptype = empty(theme_get_setting('ptype'))? variable_get('etype_ptype'): theme_get_setting('ptype');
   $site = variable_get('site_name', 'Drupal');
-
-  /* because Lutcher has a comma */
-  if (strpos($e_edition, '|') !== false) {
-    $items = explode(',', $e_edition);
-    $pubs = explode(',', $pub);
-    $ptypes = explode(',', $ptype);
-  } else {
-    $items = [$e_edition];
-    $pubs = [$pub];
-    $ptypes = [$ptype];
-  }
-
-  $e_editions = [];
+  $items = explode(',', $e_edition);
+  $pubs = explode(',', $pub);
+  $ptypes = explode(',', $ptype);
+  $e_editions = array();
   $ptr = 0;
   foreach ($items as $item) {
     $arr = explode('|', $item);
@@ -402,8 +366,20 @@ function _etype_get_site_identifier() {
 }
 
 /**
+ * Implements hook_process_html().
+ *
+ * Add script to fire iOS add to home screen
+ */
+function etype_process_html(&$variables) {
+  if (module_exists('pwa')) {
+    $variables['page_top'] .= '<script type="text/javascript">addToHomescreen()</script' .
+      PHP_EOL;
+  }
+}
+
+/**
  * @param $variables
- * Add fontawesome script
+ * Add fontawesome script, pwa scripts for iOS
  */
 function etype_preprocess_html(&$variables) {
   $fontawesome = [
@@ -433,6 +409,76 @@ enable_page_level_ads: true
   drupal_add_css(drupal_get_path('module', 'etype') . '/css/etype.css');
   drupal_add_js(drupal_get_path('module', 'etype') . '/js/etype.js');
   $variables['classes_array'][] = _etype_get_site_identifier();
+
+  if (module_exists('pwa')) {
+    $path = variable_get('file_public_path', conf_path() . '/files');
+    /* Add iOS code and icons */
+    drupal_add_css(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.css');
+    drupal_add_js(drupal_get_path('module', 'etype') . '/addtohomescreen/addtohomescreen.js');
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-icon',
+      'href' => $path . '/assets/icon-144.png',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-icon',
+      'href' => $path . '/assets/icon-152.png',
+      'sizes' => '152x152',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-icon',
+      'href' => $path . '/assets/icon-167.png',
+      'sizes' => '167x167',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-icon',
+      'href' => $path . '/assets/icon-180.png',
+      'sizes' => '180x180',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-icon',
+      'href' => $path . '/assets/icon-vector.svg',
+      'sizes' => '192x192',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-startup-image',
+      'href' => $path . '/assets/Splash_Screen_720x1280px.png',
+      'sizes' => '720x1280',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-startup-image',
+      'href' => $path . '/assets/Splash_Screen_1242x2688px.png',
+      'sizes' => '1242x2688',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-startup-image',
+      'href' => $path . '/assets/Splash_Screen_1125x2436px.png',
+      'sizes' => '1125x2436',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-startup-image',
+      'href' => $path . '/assets/Splash_Screen_1242x2208px.png',
+      'sizes' => '1242x2208',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-startup-image',
+      'href' => $path . '/assets/Splash_Screen_750x1334.png',
+      'sizes' => '750x1334',
+    ]);
+    drupal_add_html_head_link([
+      'rel' => 'apple-touch-startup-image',
+      'href' => $path . '/assets/Splash_Screen_640x1136px.png',
+      'sizes' => '640x1136',
+    ]);
+    $apple_mobile = [
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => [
+        'http-equiv' => 'apple-mobile-web-app-capable',
+        'content' => 'yes',
+      ],
+    ];
+    drupal_add_html_head($apple_mobile, 'apple-mobile-web-app-capable');
+  }
 }
 
 /**
@@ -459,7 +505,10 @@ function etype_preprocess_search_results(&$vars) {
   $value = '';
   $output_results = [];
   foreach ($results as $item) {
-    $value .= theme('search_result', ['result' => $item, 'module' => $vars['module']]);
+    $value .= theme('search_result', [
+      'result' => $item,
+      'module' => $vars['module']
+    ]);
     $output_results[] = $value;
     $value = '';
   } // store all results into an array
@@ -469,15 +518,22 @@ function etype_preprocess_search_results(&$vars) {
 
 /**
  * Implements hook_user_login()
+ *
  * @param $edit
  * @param $account
  * Set cookie by role for caching/proxy serving
  */
 function etype_user_login(&$edit, $account) {
   function in_array_any($needles, $haystack) {
-    return (bool)(array_intersect($needles, $haystack));
+    return (bool) (array_intersect($needles, $haystack));
   }
-  $check = in_array_any(['administrator', 'Editor', 'editor', 'Reporter'], $account->roles);
+
+  $check = in_array_any([
+    'administrator',
+    'Editor',
+    'editor',
+    'Reporter'
+  ], $account->roles);
   if ($check == 1) {
     setcookie('nocache', '1', 0, '/');
   } else {
@@ -500,6 +556,7 @@ function etype_user_logout($account) {
 
 /**
  * For ADA compliance, make sure images have alt tag.
+ *
  * @param $variables
  */
 function etype_preprocess_image(&$variables) {
@@ -516,7 +573,7 @@ function etype_preprocess_image(&$variables) {
 function etype_theme() {
   return [
     'ada_compliance' => [
-      'path' =>  drupal_get_path('module', 'etype'),
+      'path' => drupal_get_path('module', 'etype'),
       'template' => 'templates/ada-compliance',
     ],
   ];
@@ -528,4 +585,82 @@ function etype_theme() {
  */
 function _etype_ada_compliance() {
   return theme('ada_compliance');
+}
+
+/**
+ * PWA
+ */
+if (module_exists('pwa')) {
+
+  /**
+   * Hooks provided by the Progressive Web App module.
+   */
+
+  /**
+   * @addtogroup hooks
+   * @{
+   */
+
+  /**
+   * Manually alter manifest.json
+   * This hook allows manual configuration of the manifest.json file. Some of the
+   * options can be configured in the admin settings of the module, but it can all
+   * be altered within the hook.
+   * After you make your modifications you do NOT need to return the results.
+   * Since $manifest is passed by reference, any changes made to $manifest are
+   * automatically registered.
+   *
+   * @param array &$manifest Modified options that are used to build manifest.json
+   */
+  function etype_pwa_manifest_alter(&$manifest) {
+
+    // Get file path
+    $path = variable_get('file_public_path', conf_path() . '/files');
+
+    // Change a string-based property.
+    $manifest['name'] = variable_get('pwa_name', variable_get('site_name'));
+
+    // Change array-based properties. In this case we're manually specifying which
+    // icons will appear in the manifest. Normally you have to specify each size
+    // listed here to meet criteria for "Add to Homescreen"
+    $manifest['icons'] = [
+      [
+        'src' => url($path . '/assets/icon-512.png'),
+        'sizes' => '512x512',
+        'type' => 'image/png',
+      ],
+      [
+        'src' => url($path . '/assets/icon-192.png'),
+        'sizes' => '192x192',
+        'type' => 'image/png',
+      ],
+      [
+        'src' => url($path . '/assets/icon-144.png'),
+        'sizes' => '144x144',
+        'type' => 'image/png',
+      ],
+      [
+        'src' => url($path . '/assets/icon-vector.svg'),
+        'type' => 'image/svg+xml',
+      ],
+    ];
+
+    // Add a new parameter
+    //
+    // Here we are specifying `orientation`. If your website is designed to be
+    // viewed ONLY in landscape, the `orientation` setting can help the PWA look
+    // good while the splash/loading screens are displaying.
+    //
+    // We omit this property by default from the module for accessibility reasons.
+    // For more information see the d.o issue and WCAG documentation:
+    //
+    // @see https://www.drupal.org/project/pwa/issues/3070058
+    // @see https://www.w3.org/WAI/WCAG21/Understanding/orientation.html
+    $manifest['orientation'] = 'landscape';
+  }
+
+  /**
+   * @} End of "addtogroup hooks".
+   */
+
 }
