@@ -79,6 +79,17 @@ function _etype_social_content() {
   $googleplus = theme_get_setting('googleplus');
   $youtube = theme_get_setting('youtube');
   $rssfeed = theme_get_setting('rssfeed');
+
+  if (empty($facebook)) {
+    $facebook = variable_get('etype_facebook_top');
+    $twitter = variable_get('etype_twitter_top');
+    $instagram = variable_get('etype_instagram_top');
+    $youtube = variable_get('etype_youtube_top');
+    $pinterest = variable_get('etype_pinterest_top');
+    $vimeo = variable_get('etype_vimeo_top');
+    $rss = variable_get('etype_rss_top');
+  }
+
   if (!empty($facebook)) {
     $output .= '<li><a class="facebook" href="https://www.facebook.com/' . $facebook . '"></a></li>';
   }
