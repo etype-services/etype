@@ -342,6 +342,12 @@ function etype_admin() {
     '#default_value' => variable_get('etype_body_script', ''),
   ];
 
+  $form['etype_scripts']['etype_pushly'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable Pushly integration'),
+    '#default_value' => variable_get('etype_pushly', ''),
+  ];
+
   /* Classified Ads Import */
   $form['etype_classified'] = [
     '#type' => 'fieldset',

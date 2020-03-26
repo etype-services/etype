@@ -518,6 +518,11 @@ enable_page_level_ads: true
     ];
     drupal_add_html_head($apple_mobile, 'apple-mobile-web-app-capable');
   }
+
+  $pushly = variable_get('etype_pushly');
+  if ($pushly == 1) {
+    drupal_add_js(drupal_get_path('module', 'etype') . '/js/pushly-sdk-worker.js');
+  }
 }
 
 /**
