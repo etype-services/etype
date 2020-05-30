@@ -342,6 +342,12 @@ function etype_admin() {
     '#default_value' => variable_get('etype_body_script', ''),
   ];
 
+  $form['etype_scripts']['etype_ada_compliance'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Add ADA Compliance script'),
+    '#default_value' => variable_get('etype_ada_compliance', 0),
+  ];
+
   /* Classified Ads Import */
   $form['etype_classified'] = [
     '#type' => 'fieldset',
