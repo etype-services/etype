@@ -8,7 +8,7 @@ function etype_admin() {
   /* e_edition settings */
   $form['e_edition'] = [
     '#type' => 'fieldset',
-    '#title' => t('e-Edition'),
+    '#title' => t('e-Edition/Login'),
   ];
 
   $form['e_edition']['etype_e_edition'] = [
@@ -36,6 +36,12 @@ function etype_admin() {
     '#description' => t('Separate multiple entries with a comma, in the same order as the e-Editions'),
     '#size' => 55,
     '#default_value' => variable_get('etype_ptype'),
+  ];
+
+  $form['e_edition']['etype_v2'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Use V2 Login'),
+    '#default_value' => variable_get('etype_v2', 0),
   ];
 
   /* facebook */
@@ -100,38 +106,6 @@ function etype_admin() {
     '#type' => 'checkbox',
     '#title' => t('Add link to Contact page (News+ theme only)'),
     '#default_value' => variable_get('etype_twitter_contact', 0),
-  ];
-
-  /* googleplus */
-  $form['googleplus'] = [
-    '#type' => 'fieldset',
-    '#title' => t('Google Plus'),
-  ];
-
-  $form['googleplus']['etype_googleplus_url'] = [
-    '#type' => 'textfield',
-    '#title' => t('Google Plus'),
-    '#description' => t('Google Plus URL'),
-    '#size' => 55,
-    '#default_value' => variable_get('etype_googleplus_url', 'https://plus.google.com/'),
-  ];
-
-  $form['googleplus']['etype_googleplus_top'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Add link to main navigation bar'),
-    '#default_value' => variable_get('etype_googleplus_top', 0),
-  ];
-
-  $form['googleplus']['etype_googleplus_footer'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Add link to footer area'),
-    '#default_value' => variable_get('etype_googleplus_footer', 0),
-  ];
-
-  $form['googleplus']['etype_googleplus_contact'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Add link to Contact page (News+ theme only)'),
-    '#default_value' => variable_get('etype_googleplus_contact', 0),
   ];
 
   /* youtube */

@@ -315,7 +315,7 @@ function _etype_contact_follow_content() {
 function _etype_facebook_feed_content() {
   $url = variable_get('etype_facebook_url');
   $name = variable_get('site_name');
-  $output = "
+  return "
   <div id=\"fb-root\"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -326,5 +326,4 @@ function _etype_facebook_feed_content() {
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class=\"fb-page\" data-href=\"$url\" data-tabs=\"timeline\" data-width=\"340\" data-height=\"600\" data-small-header=\"true\" data-adapt-container-width=\"true\" data-hide-cover=\"false\" data-show-facepile=\"false\"><blockquote cite=\"$url\" class=\"fb-xfbml-parse-ignore\"><a href=\"$url\">$name</a></blockquote></div>
 ";
-  return $output;
 }
