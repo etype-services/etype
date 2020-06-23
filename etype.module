@@ -134,9 +134,8 @@ function _etype_e_edition() {
   $e_editions = etype_e_editions();
   $v2 = variable_get('etype_v2');
   if ($v2 == 1) {
-    $uid = user_is_logged_in();
-    if ($uid > 0) {
-      $user = user_load($uid);
+    if (user_is_logged_in()) {
+      global $user;
       $username = $user->name;
     } else {
       $username = 'invalidName';
@@ -259,25 +258,25 @@ function etype_classified_mapping($vid) {
 function etype_entity_create($item = [], $values = [], $entity_type = 'node') {
 
   $entity = entity_create($entity_type, $values);
-  $ewrapper = entity_metadata_wrapper($entity_type, $entity);
+  $eWrapper = entity_metadata_wrapper($entity_type, $entity);
   if (count($item) > 0) {
     foreach ($item as $k => $v) {
       switch ($k) {
 
         case 'body':
-          $ewrapper->body->set(['value' => $v]);
+          $eWrapper->body->set(['value' => $v]);
           break;
 
         case 'category':
           $v = intval($v);
-          $ewrapper->classified_category->set($v);
+          $eWrapper->classified_category->set($v);
           break;
 
         default:
-          $ewrapper->$k->set($v);
+          $eWrapper->$k->set($v);
       }
     }
-    $ewrapper->save(TRUE);
+    $eWrapper->save(TRUE);
   }
 }
 
