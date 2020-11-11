@@ -58,6 +58,7 @@ function etype_login_form_submit($form, &$form_state) {
   $error_message = "We‘re sorry, either your user name or password is incorrect!";
   $expired_message = "We‘re sorry, your subscription has expired.";
   $success_message = "Hello $username, you are now logged in!";
+  $auth_message = "We can‘t authenticate that user and password combination. There might be an existing user with that email address. Please contact support@etypeservices.com and we will help you.";
 
   $client = new soapclient('https://publisher.etype.services/webservice.asmx?WSDL');
   $param = [
@@ -99,6 +100,7 @@ function etype_login_form_submit($form, &$form_state) {
           drupal_set_message("Could not save User", 'error');
         }
       }
+
       if (user_authenticate($username, $password)) {
         $user_obj = user_load_by_name($username);
         $form_state = [];
@@ -107,6 +109,7 @@ function etype_login_form_submit($form, &$form_state) {
         drupal_set_message($success_message, 'status');
         drupal_goto('/');
       } else {
+        drupal_set_message($auth_message, 'status');
         return false;
       }
   }
