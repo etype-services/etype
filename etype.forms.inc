@@ -109,7 +109,7 @@ function etype_login_form_submit($form, &$form_state) {
         drupal_set_message($success_message, 'status');
         drupal_goto('/');
       } else {
-        drupal_set_message($auth_message, 'status');
+        drupal_set_message($auth_message, 'error');
         return false;
       }
   }
