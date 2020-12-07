@@ -85,7 +85,7 @@ function etype_block_view($delta = '') {
  * ADA Compliance Logo block
  */
 function _etype_ada_compliance_logo() {
-  return '<a href="/ada-compliance" aria-label="ADA Compliance Logo"><img src="/modules/custom/etype/img/ADACompliantLogo.jpg" alt="This site complies with ADA requirements" /></a>
+  return '<a href="/ada-compliance" aria-label="ADA Compliance Logo"><img src="/sites/all/modules/etype/img/ADACompliantLogo.jpg" alt="This site complies with ADA requirements" /></a>
 ';
 }
 
