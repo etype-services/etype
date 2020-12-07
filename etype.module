@@ -400,13 +400,13 @@ function etype_preprocess_html(&$variables) {
 google_ad_client: "' . $adsense . '",
 enable_page_level_ads: true
 });
-</script> 
+</script>
 ',
     ];
     drupal_add_html_head($adsense_script, 'etype_adsense');
   }
 
-  drupal_add_css(drupal_get_path('module', 'etype') . '/css/etype.css');
+  drupal_add_css(drupal_get_path('module', 'etype') . '/css/styles.css');
   drupal_add_js(drupal_get_path('module', 'etype') . '/js/etype.js');
   $variables['classes_array'][] = _etype_get_site_identifier();
 

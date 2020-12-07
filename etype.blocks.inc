@@ -27,6 +27,11 @@ function etype_block_info() {
   $blocks['e-Edition'] = array(
     'info' => t('e-Edition'),
   );
+
+  $blocks['etype-ada-compliance-logo'] = [
+    'info' => t('eType ADA Compliance'),
+  ];
+
   return $blocks;
 }
 
@@ -61,8 +66,21 @@ function etype_block_view($delta = '') {
       $block['subject'] = '';
       $block['content'] = _etype_e_edition_content();
       break;
+
+    case 'etype-ada-compliance-logo':
+      $block['subject'] = 'ADA Compliance';
+      $block['content'] = _etype_ada_compliance_logo();
+      break;
   }
   return $block;
+}
+
+/**
+ * ADA Compliance Logo block
+ */
+function _etype_ada_compliance_logo() {
+  return '<a href="/ada-compliance" aria-label="ADA Compliance Logo"><img src="/sites/all/modules/etype/img/ADACompliantLogo.jpg" alt="This site complies with ADA requirements" /></a>
+';
 }
 
 /**
