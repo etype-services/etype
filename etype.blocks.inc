@@ -28,6 +28,10 @@ function etype_block_info() {
     'info' => t('eType Facebook Feed'),
   ];
 
+  $blocks['etype-ada-compliance'] = [
+    'info' => t('eType ADA Compliance'),
+  ];
+
   return $blocks;
 }
 
@@ -67,9 +71,22 @@ function etype_block_view($delta = '') {
       $block['content'] = _etype_facebook_feed_content();
       break;
 
+    case 'etype-ada-compliance':
+      $block['subject'] = 'ADA Compliance';
+      $block['content'] = _etype_ada_compliance();
+      break;
+
   }
 
   return $block;
+}
+
+/**
+ * ADA Compliance Logo block
+ */
+function _etype_ada_compliance() {
+  return '<a href="/ada-compliance" aria-label="ADA Compliance Logo"><img src="/modules/custom/etype/img/ADACompliantLogo.jpg" alt="This site complies with ADA requirements" /></a>
+';
 }
 
 /**
