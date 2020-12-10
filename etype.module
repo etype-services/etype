@@ -408,7 +408,9 @@ enable_page_level_ads: true
 
   drupal_add_css(drupal_get_path('module', 'etype') . '/css/styles.css');
   drupal_add_js(drupal_get_path('module', 'etype') . '/js/etype.js');
-  drupal_add_js(drupal_get_path('module', 'etype') . '/js/ada-compliance.js');
+  if ($ada_compliance == 1) {
+    drupal_add_js(drupal_get_path('module', 'etype') . '/js/ada-compliance.js');
+  }
   $variables['classes_array'][] = _etype_get_site_identifier();
 
   if (module_exists('pwa')) {
