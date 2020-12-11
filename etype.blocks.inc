@@ -71,6 +71,26 @@ function etype_block_view($delta = '') {
       $block['subject'] = 'ADA Compliance';
       $block['content'] = _etype_ada_compliance_logo();
       break;
+
+    case 'blue_orchid_300250':
+      $block['subject'] = 'Blue Orchid 300 x 250';
+      $block['content'] = _blue_orchid_300250();
+      break;
+
+    case 'blue_orchid_300600':
+      $block['subject'] = 'Blue Orchid 300 x 600';
+      $block['content'] = _blue_orchid_300600();
+      break;
+
+    case 'blue_orchid_46860':
+      $block['subject'] = 'Blue Orchid 468 x 60';
+      $block['content'] = _blue_orchid_46860();
+      break;
+
+    case 'blue_orchid_72890':
+      $block['subject'] = 'Blue Orchid 728 x 90';
+      $block['content'] = _blue_orchid_72890();
+      break;
   }
   return $block;
 }
@@ -213,4 +233,57 @@ function _etype_e_edition_content() {
 ';
   }
   return $output;
+}
+
+/* Blue Orchid Blocks */
+function _blue_orchid_300250(): string {
+  return '
+<script type="text/javascript">
+google_ad_client = "ca-pub-6055882063795349";
+google_ad_slot = "EType_RON";
+google_ad_width = 300;
+google_ad_height = 250;
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+  ';
+}
+
+function _blue_orchid_300600(): string {
+  return <<<'TAG'
+<script type="text/javascript">
+google_ad_client = "ca-pub-6055882063795349";
+google_ad_slot = "EType_RON";
+google_ad_width = 300;
+google_ad_height = 600;
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+TAG;
+}
+
+function _blue_orchid_46860(): string {
+  return <<<'TAG'
+<script type="text/javascript">
+google_ad_client = "ca-pub-6055882063795349";
+google_ad_slot = "EType_RON";
+google_ad_width = 468;
+google_ad_height = 60;
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+TAG;
+}
+
+function _blue_orchid_72890(): string {
+  return <<<'TAG'
+<script type="text/javascript">
+google_ad_client = "ca-pub-6055882063795349";
+google_ad_slot = "EType_RON";
+google_ad_width = 728;
+google_ad_height = 90;
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+TAG;
 }
