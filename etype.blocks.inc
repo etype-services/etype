@@ -32,6 +32,23 @@ function etype_block_info() {
     'info' => t('eType ADA Compliance'),
   ];
 
+  $blocks['blue_orchid_300250'] = [
+    'info' => t('Blue Orchid 300 x 250'),
+  ];
+
+  $blocks['blue_orchid_300600'] = [
+    'info' => t('Blue Orchid 300 x 600'),
+  ];
+
+  $blocks['blue_orchid_46860'] = [
+    'info' => t('Blue Orchid 468 x 60'),
+  ];
+
+  $blocks['blue_orchid_72890'] = [
+    'info' => t('Blue Orchid 728 x 90'),
+  ];
+
+
   return $blocks;
 }
 
