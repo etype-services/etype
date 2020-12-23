@@ -204,8 +204,8 @@ function etype_cronapi($op, $job = NULL): array {
       'rule' => $cron_schedule,
       'callback' => 'etype_classified_ad_importer',
     ];
-    return $items;
   }
+  return $items;
 }
 
 /**
@@ -255,6 +255,7 @@ function etype_classified_mapping($vid): int {
  * @param array $item
  * @param array $values
  * @param string $entity_type
+ * @throws EntityMetadataWrapperException
  */
 function etype_entity_create($item = [], $values = [], $entity_type = 'node') {
 
