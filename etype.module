@@ -122,7 +122,7 @@ function _etype_is_logged_out() {
 /**
  * @return bool
  */
-function _etype_is_logged_in() {
+function _etype_is_logged_in(): bool {
   $uid = user_is_logged_in();
   return $uid > 0;
 }
@@ -159,7 +159,7 @@ function _etype_e_edition() {
  *
  * @return string
  */
-function _etype_site_path() {
+function _etype_site_path(): string {
   return $_SERVER['DOCUMENT_ROOT'] . base_path() . conf_path();
 }
 
@@ -186,7 +186,7 @@ function etype_node_cleanup() {
  * @param null $job
  * @return mixed
  */
-function etype_cronapi($op, $job = NULL) {
+function etype_cronapi($op, $job = NULL): array {
   $cron_schedule = variable_get('etype_classified_cron', '');
   if (empty ($cron_schedule)) {
     $etype_site_path = _etype_site_path();
@@ -212,7 +212,7 @@ function etype_cronapi($op, $job = NULL) {
  * @return int|mixed|void
  * Map xml classified categories to Drupal taxonomy items
  */
-function etype_classified_mapping($vid) {
+function etype_classified_mapping($vid): int {
 
   $cats = variable_get('etype_classified_map');
   $categories = [];
@@ -228,7 +228,7 @@ function etype_classified_mapping($vid) {
 
   if (!isset($vid)) {
     watchdog('etype', "No category id for item", $variables = [], $severity = WATCHDOG_ERROR);
-    return;
+    return 0;
   } else {
 
     $ad_cat = 0;
@@ -409,7 +409,7 @@ function etype_premium_access(&$node, $teaser = NULL) {
  *
  * @return array
  */
-function etype_e_editions() {
+function etype_e_editions(): array {
   $v2 = variable_get('etype_v2');
   $uid = user_is_logged_in();
   $e_edition = empty(theme_get_setting('e_edition')) ? variable_get('etype_e_edition') : theme_get_setting('e_edition');
@@ -646,7 +646,7 @@ function etype_preprocess_search_results(&$vars) {
  * Set cookie by role for caching/proxy serving
  */
 function etype_user_login(&$edit, $account) {
-  function in_array_any($needles, $haystack) {
+  function in_array_any($needles, $haystack): bool {
     return (bool) (array_intersect($needles, $haystack));
   }
 

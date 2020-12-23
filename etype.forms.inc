@@ -38,6 +38,11 @@ function etype_login_form($form, &$form_state) {
       '#markup' => t('<a href="/etype-forgot-password">I forgot my password.</a>'),
     ];
 
+    $form['destination'] = [
+      '#type' => 'hidden',
+      '#value' => $_POST['destination'],
+    ];
+
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => t('Login'),
@@ -49,10 +54,11 @@ function etype_login_form($form, &$form_state) {
 
 }
 
-function etype_login_form_submit($form, &$form_state) {
+function etype_login_form_submit($form, &$form_state): bool {
 
   $username = $form['username']['#value'];
   $password = $form['password']['#value'];
+  $destination = $form['destination']['#value'];
   $etype_pub = variable_get('etype_pub');
 
   $error_message = "We‘re sorry, either your user name or password is incorrect!";
@@ -107,7 +113,7 @@ function etype_login_form_submit($form, &$form_state) {
         $form_state['uid'] = $user_obj->uid;
         user_login_submit([], $form_state);
         drupal_set_message($success_message, 'status');
-        drupal_goto('/');
+        drupal_goto($destination);
       } else {
         drupal_set_message($auth_message, 'error');
         return false;
