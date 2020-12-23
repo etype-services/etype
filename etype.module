@@ -186,7 +186,7 @@ function etype_node_cleanup() {
  * @param null $job
  * @return mixed
  */
-function etype_cronapi($op, $job = NULL): array {
+function etype_cronapi($op, $job = NULL): ?array {
   $cron_schedule = variable_get('etype_classified_cron', '');
   if (empty ($cron_schedule)) {
     $etype_site_path = _etype_site_path();
