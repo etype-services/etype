@@ -114,7 +114,7 @@ function etype_menu() {
 /**
  * @return bool
  */
-function _etype_is_logged_out() {
+function _etype_is_logged_out(): bool {
   $uid = user_is_logged_in();
   return $uid == 0;
 }
@@ -184,9 +184,10 @@ function etype_node_cleanup() {
  *
  * @param $op
  * @param null $job
- * @return mixed
+ * @return array
  */
-function etype_cronapi($op, $job = NULL): ?array {
+function etype_cronapi($op, $job = NULL): array {
+  $items = [];
   $cron_schedule = variable_get('etype_classified_cron', '');
   if (empty ($cron_schedule)) {
     $etype_site_path = _etype_site_path();
