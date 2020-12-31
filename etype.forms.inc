@@ -64,7 +64,7 @@ function etype_login_form_submit($form, &$form_state): bool {
   $error_message = "We‘re sorry, either your user name or password is incorrect!";
   $expired_message = "We‘re sorry, your subscription has expired.";
   $success_message = "Hello $username, you are now logged in!";
-  $auth_message = "We couldn‘t log you in. We have cleared your data, so please try again. If you still can‘t login, please contact support@etypeservices.com and we will help you.";
+  $auth_message = "We couldn‘t log you in, but we have cleared your data, so please try again. If you still can‘t login, please contact support@etypeservices.com and we will help you.";
 
   $client = new soapclient('https://publisher.etype.services/webservice.asmx?WSDL');
   $param = [
