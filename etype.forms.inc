@@ -64,7 +64,7 @@ function etype_login_form_submit($form, &$form_state): bool {
   $error_message = "We‘re sorry, either your user name or password is incorrect!";
   $expired_message = "We‘re sorry, your subscription has expired.";
   $success_message = "Hello $username, you are now logged in!";
-  $auth_message = "We can‘t authenticate that user and password combination. There might be an existing user with that email address. Please contact support@etypeservices.com and we will help you.";
+  $auth_message = "We couldn‘t authenticate that user and password combination. We have cleared your data, please try again. If you still can‘t login, please contact support@etypeservices.com and we will help you.";
 
   $client = new soapclient('https://publisher.etype.services/webservice.asmx?WSDL');
   $param = [
@@ -89,7 +89,7 @@ function etype_login_form_submit($form, &$form_state): bool {
       $subscriberEmail = $validateSubscriberResult->Email;
       $user = user_load_by_mail($subscriberEmail);
       if ($user == false) {
-        $new_user = array(
+        $user = array(
           'name' => $username,
           'pass' => $password, // note: do not md5 the password
           'mail' => $subscriberEmail,
@@ -101,7 +101,7 @@ function etype_login_form_submit($form, &$form_state): bool {
         );
 
         try {
-          user_save('', $new_user);
+          user_save('', $user);
         } catch (Exception $e) {
           drupal_set_message("Could not save User", 'error');
         }
@@ -116,6 +116,7 @@ function etype_login_form_submit($form, &$form_state): bool {
         drupal_goto($destination);
       } else {
         watchdog('V2_login', $subscriberEmail, [], WATCHDOG_ERROR);
+        user_delete($user->uid);
         drupal_set_message($auth_message, 'error');
         return false;
       }
