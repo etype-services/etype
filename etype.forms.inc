@@ -115,6 +115,7 @@ function etype_login_form_submit($form, &$form_state): bool {
         drupal_set_message($success_message, 'status');
         drupal_goto($destination);
       } else {
+        watchdog('V2_login', $subscriberEmail, [], WATCHDOG_ERROR);
         drupal_set_message($auth_message, 'error');
         return false;
       }
