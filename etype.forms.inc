@@ -116,6 +116,7 @@ function etype_login_form_submit($form, &$form_state): bool {
         drupal_goto($destination);
       } else {
         watchdog('V2_login', $subscriberEmail, [], WATCHDOG_ERROR);
+        /* Clear info and invite user to start afresh. */
         user_delete($user->uid);
         drupal_set_message($auth_message, 'error');
         return false;
