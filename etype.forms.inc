@@ -205,7 +205,7 @@ function etype_password_form_submit($form, &$form_state) {
 /**
  * Not a form, but here because it is to do with the account.
  */
-function etype_my_account() {
+function etype_my_account(): array {
   global $user;
   $etype_pub = variable_get('etype_pub');
   $markup = <<<EOF
