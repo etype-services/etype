@@ -201,28 +201,3 @@ function etype_password_form_submit($form, &$form_state) {
       break;
   }
 }
-
-/**
- * Not a form, but here because it is to do with the account.
- */
-function etype_my_account(): array {
-  global $user;
-  $etype_pub = variable_get('etype_pub');
-  $markup = <<<EOF
-      <script type='text/javascript'>
-      window.addEventListener('message', receiveMessage, false);
-      function receiveMessage(event) {
-        let ifrmAccountUpdateForm = document.getElementById('ifrmAccountUpdateForm');
-		    if (event.data.docHeight != undefined && event.data.docHeight != 'undefined') {
-		      ifrmAccountUpdateForm.height = event.data.docHeight;
-		    }
-      }
-      </script>
-      <iframe id='ifrmAccountUpdateForm'
-        src='https://publisher.etype.services/subscriber-account?pubId=$etype_pub&username=$user->name'
-        width='100%' height='860' frameborder='0' scrolling='no'></iframe>
-EOF;
-  return [
-    "#markup" => $markup,
-  ];
-}
