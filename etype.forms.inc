@@ -86,6 +86,7 @@ function etype_login_form_submit($form, &$form_state): bool {
       break;
 
     default:
+      /* V2 authenticated correctly */
       $subscriberEmail = $validateSubscriberResult->Email;
       /* Check there is already a user */
       $user = user_load_by_mail($subscriberEmail);
