@@ -87,7 +87,9 @@ function etype_login_form_submit($form, &$form_state): bool {
 
     default:
       $subscriberEmail = $validateSubscriberResult->Email;
+      /* Check there is already a user */
       $user = user_load_by_mail($subscriberEmail);
+      /* If not, make one */
       if ($user == false) {
         $user = array(
           'name' => $username,
@@ -115,11 +117,36 @@ function etype_login_form_submit($form, &$form_state): bool {
         drupal_set_message($success_message, 'status');
         drupal_goto($destination);
       } else {
+        /*
+         * Something went wrong, a mismatched email or password.
+         * Changes to V2 don't propagate to Drupal
+        */
         watchdog('V2_login', $subscriberEmail, [], WATCHDOG_ERROR);
-        /* Clear info and invite user to start afresh. */
+        /* Clear info and start afresh. */
         user_delete($user->uid);
-        drupal_set_message($auth_message, 'error');
-        return false;
+        $user = array(
+          'name' => $username,
+          'pass' => $password, // note: do not md5 the password
+          'mail' => $subscriberEmail,
+          'status' => 1,
+          'init' => $subscriberEmail,
+          'roles' => [
+            DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+          ],
+        );
+
+        try {
+          user_save('', $user);
+          $user_obj = user_load_by_name($username);
+          $form_state = [];
+          $form_state['uid'] = $user_obj->uid;
+          user_login_submit([], $form_state);
+          drupal_set_message($success_message, 'status');
+          drupal_goto($destination);
+        } catch (Exception $e) {
+          drupal_set_message("Could not save User", 'error');
+        }
+
       }
   }
 
