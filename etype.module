@@ -404,6 +404,7 @@ function etype_premium_access(&$node, $teaser = NULL): bool {
   if (in_array($solicitud, $permitido)) {
     return TRUE;
   }
+  return FAlSE;
 }
 
 /**
