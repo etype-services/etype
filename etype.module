@@ -387,6 +387,9 @@ function etype_form_contact_site_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
+ * Override Premium Access for feeds.
+ * DO NOT ADD FUNCTION RETURN TYPE.
+ *
  * @param $node
  * @param $teaser
  * @return bool
