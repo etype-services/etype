@@ -33,6 +33,27 @@ function etype_login_form($form, &$form_state) {
       '#required' => TRUE,
     ];
 
+    $e_editions = etype_e_editions();
+    if (count($e_editions) > 1) {
+      $options = [];
+      foreach ($e_editions as $edition) {
+        $options[$edition['pubId']] = $edition['site_name'];
+      }
+      $form['pubId'] = [
+        '#title' => t('Choose your publication'),
+        '#type' => 'select',
+        '#options' => $options,
+        '#required' => TRUE,
+      ];
+    }
+    else {
+      $form['pubId'] = [
+        '#type' => 'hidden',
+        '#default_value' => $e_editions[0]['pubId'],
+      ];
+    }
+
+
     $form['help'] = [
       '#type' => 'item',
       '#markup' => t('<a href="/etype-forgot-password">I forgot my password.</a>'),
@@ -59,12 +80,11 @@ function etype_login_form_submit($form, &$form_state): bool {
   $username = $form['username']['#value'];
   $password = $form['password']['#value'];
   $destination = $form['destination']['#value'];
-  $etype_pub = variable_get('etype_pub');
+  $etype_pub = $form['pubId']['#value'];
 
   $error_message = "We‘re sorry, either your user name or password is incorrect!";
   $expired_message = "We‘re sorry, your subscription has expired.";
   $success_message = "Hello $username, you are now logged in!";
-  $auth_message = "We couldn‘t log you in, but we have cleared your data, so please try again. If you still can‘t login, please contact support@etypeservices.com and we will help you.";
 
   $client = new soapclient('https://publisher.etype.services/webservice.asmx?WSDL');
   $param = [

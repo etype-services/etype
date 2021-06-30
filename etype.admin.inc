@@ -14,7 +14,7 @@ function etype_admin() {
   $form['e_edition']['etype_e_edition'] = [
     '#type' => 'textarea',
     '#title' => t('e-Edition'),
-    '#description' => t('For one paper enter the e-Edition like <code>Mitchell%20News-JournalID617</code>, for more than one format like this: <code>Mitchell%20News-JournalID617|Mitchell News Journal,The%20Yorktown%20News-ViewID84|The Yorktown News View</code>. If this site connects to multiple papers and is on V2, just enter the site names separated by ,'),
+    '#description' => t('For one paper enter the e-Edition like <code>Mitchell%20News-JournalID617</code>, for more than one format like this: <code>Mitchell%20News-JournalID617|Mitchell News Journal,The%20Yorktown%20News-ViewID84|The Yorktown News View</code>. If this site connects to multiple papers and is on V2, just enter the site names separated by a comma.'),
     '#size' => 101,
     '#default_value' => variable_get('etype_e_edition'),
   ];
