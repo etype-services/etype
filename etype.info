@@ -9,6 +9,7 @@ dependencies[] = entity
 
 files[] = etype.admin.inc
 files[] = etype.blocks.inc
+files[] = etype.forms.inc
 
 ; Add if necessary
 ;scripts[] = js/etype.js
