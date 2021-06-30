@@ -146,25 +146,25 @@ function _etype_social_content() {
   }
 
   if (!empty($facebook)) {
-    $output .= '<li><a class="facebook" href="https://www.facebook.com/' . $facebook . '"></a></li>';
+    $output .= '<li><a class="facebook" target="_blank" href="https://www.facebook.com/' . $facebook . '"></a></li>';
   }
   if (!empty($twitter)) {
-    $output .= '<li><a class="twitter" href="https://twitter.com/' . $twitter . '"></a></li>';
+    $output .= '<li><a class="twitter" target="_blank" href="https://twitter.com/' . $twitter . '"></a></li>';
   }
   if (!empty($pinterest)) {
-    $output .= '<li><a class="pinterest" href="https://www.pinterest.com/' . $pinterest . '"></a></li>';
+    $output .= '<li><a class="pinterest" target="_blank" href="https://www.pinterest.com/' . $pinterest . '"></a></li>';
   }
   if (!empty($instagram)) {
-    $output .= '<li><a class="instagram" href="https://instagram.com/' . $instagram . '"></a></li>';
+    $output .= '<li><a class="instagram" target="_blank" href="https://instagram.com/' . $instagram . '"></a></li>';
   }
   if (!empty($googleplus)) {
-    $output .= '<li><a class="googleplus" href="https://plus.google.com/' . $googleplus . '"></a></li>';
+    $output .= '<li><a class="googleplus" target="_blank" href="https://plus.google.com/' . $googleplus . '"></a></li>';
   }
   if (!empty($youtube)) {
-    $output .= '<li><a class="youtube" href="' . $youtube . '"></a></li>';
+    $output .= '<li><a class="youtube" target="_blank" href="' . $youtube . '"></a></li>';
   }
   if (!empty($rssfeed)) {
-    $output .= '<li><a class="rss" href="/rss.xml"></a></li>';
+    $output .= '<li><a class="rss" target="_blank" href="/rss.xml"></a></li>';
   }
   $output .= '</ul>';
   return $output;
@@ -184,22 +184,22 @@ function _etype_follow_content() {
   $youtube = theme_get_setting('youtube');
   $rssfeed = theme_get_setting('rssfeed');
   if (!empty($facebook)) {
-    $output .= '<div class="facebook"><a href="https://www.facebook.com/' . $facebook . '">Like us on Facebook</a></div>';
+    $output .= '<div class="facebook"><a target="_blank" href="https://www.facebook.com/' . $facebook . '">Like us on Facebook</a></div>';
   }
   if (!empty($twitter)) {
-    $output .= '<div class="twitter"><a href="https://twitter.com/' . $twitter . '">Follow us on Twitter</a></div>';
+    $output .= '<div class="twitter"><a target="_blank" href="https://twitter.com/' . $twitter . '">Follow us on Twitter</a></div>';
   }
   if (!empty($pinterest)) {
-    $output .= '<div class="pinterest"><a href="https://www.pinterest.com/' . $pinterest . '">Follow us on Pinterest</a></div>';
+    $output .= '<div class="pinterest"><a target="_blank" href="https://www.pinterest.com/' . $pinterest . '">Follow us on Pinterest</a></div>';
   }
   if (!empty($instagram)) {
-    $output .= '<div class="instagram"><a href="https://instagram.com/' . $instagram . '">Follow us on Instagram</a></div>';
+    $output .= '<div class="instagram"><a target="_blank" href="https://instagram.com/' . $instagram . '">Follow us on Instagram</a></div>';
   }
   if (!empty($googleplus)) {
-    $output .= '<div class="googleplus"><a href="https://plus.google.com/' . $googleplus . '">Follow us on Google Plus</a></div>';
+    $output .= '<div class="googleplus"><a target="_blank" href="https://plus.google.com/' . $googleplus . '">Follow us on Google Plus</a></div>';
   }
   if (!empty($youtube)) {
-    $output .= '<div class="youtube"><a href="' . $youtube . '">Follow us on YouTube</a></div>';
+    $output .= '<div class="youtube"><a href="' . $youtube . '" target="_blank">Follow us on YouTube</a></div>';
   }
   if (!empty($rssfeed)) {
     $output .= '<div class="rss"><a href="/rss.xml">RSS Feed</a></div>';
@@ -230,7 +230,7 @@ function _etype_twitter_content() {
   $twitter = theme_get_setting('twitter');
   if (!empty($twitter)) {
     $output .= '
-<a class="twitter-timeline" data-height="300" href="https://twitter.com/' . $twitter . '">Tweets by ' . $twitter . '</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+<a class="twitter-timeline" target="_blank" data-height="300" href="https://twitter.com/' . $twitter . '">Tweets by ' . $twitter . '</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
   }
 
   return $output;
@@ -244,8 +244,8 @@ function _etype_e_edition_content() {
   $output = '';
   foreach($e_editions as $e_edition) {
     $output .= '
-<p class="rtecenter"><a href="' . $e_edition['path'] . '"><img src="' . $e_edition['image'] . '" alt="' . $e_edition['site_name'] . ' e-Edition" /></a></p><h4 class="rtecenter"><a href="' .
-      $e_edition['path'] . '">Click here to read ' .
+<p class="rtecenter"><a href="' . $e_edition['path'] . '" target="_blank"><img src="' . $e_edition['image'] . '" alt="' . $e_edition['site_name'] . ' e-Edition" /></a></p><h4 class="rtecenter"><a href="' .
+      $e_edition['path'] . '" target="_blank">Click here to read ' .
       $e_edition['site_name'] . '</a></h4>
 ';
   }
