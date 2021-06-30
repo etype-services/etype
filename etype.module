@@ -1,6 +1,5 @@
 <?php
 
-/* por qué, Drupal? */
 include_once 'etype.blocks.inc';
 include_once 'etype.forms.inc';
 
@@ -25,6 +24,14 @@ function etype_menu() {
     'access callback' => TRUE,
     'menu_name' => 'user-menu',
     'type' => MENU_NORMAL_ITEM,
+  ];
+
+  $items['e-edition/%'] = [
+    'title' => 'e-Edition',
+    'description' => 'Read the e-Edition',
+    'page callback' => '_etype_e_edition',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
   ];
 
   $v2 = variable_get('etype_v2');
@@ -128,9 +135,9 @@ function _etype_is_logged_in(): bool {
 }
 
 /**
- * redirect to e-Edition (defaults to first of possible multiple)
+ * @param $pubid
  */
-function _etype_e_edition() {
+function _etype_e_edition($pubid = NULL) {
   $e_editions = etype_e_editions();
   $v2 = variable_get('etype_v2');
   if ($v2 == 1) {
@@ -140,10 +147,14 @@ function _etype_e_edition() {
     } else {
       $username = 'invalidName';
     }
-    $etype_pub = variable_get('etype_pub');
+    if (empty($pubid)) {
+      $etype_pub = variable_get('etype_pub');
+      $arr = explode(',', $etype_pub);
+      $pubid = $arr[0];
+    }
     $client = new soapclient('https://publisher.etype.services/webservice.asmx?WSDL');
     $params = [
-      'publicationId' => $etype_pub,
+      'publicationId' => $pubid,
       'username' => $username,
     ];
     $data = $client->GenerateUrlForSubscriber($params);
@@ -395,7 +406,7 @@ function etype_form_contact_site_form_alter(&$form, &$form_state, $form_id) {
  * @return bool
  * override premium level for Shoutem feeds
  */
-function etype_premium_access(&$node, $teaser = NULL) {
+function etype_premium_access(&$node, $teaser = NULL): bool {
   $permitido = [
     '/news-mobile.xml',
     '/sports-mobile.xml',
@@ -420,46 +431,51 @@ function etype_e_editions(): array {
   $e_edition = empty(theme_get_setting('e_edition')) ? variable_get('etype_e_edition') : theme_get_setting('e_edition');
   $pub = empty(theme_get_setting('pub')) ? variable_get('etype_pub') : theme_get_setting('pub');
   $pType = empty(theme_get_setting('ptype')) ? variable_get('etype_ptype') : theme_get_setting('ptype');
-  $site = variable_get('site_name', 'Drupal');
+  $site_name = variable_get('site_name', 'Drupal');
+  $pubs = [];
 
-  /* because Lutcher has a comma */
-  if (strpos($e_edition, '|') !== FALSE) {
-    $items = explode(',', $e_edition);
-    $pubs = explode(',', $pub);
-    $pTypes = explode(',', $pType);
-  } else {
-    $items = [$e_edition];
-    $pubs = [$pub];
-    $pTypes = [$pType];
+  switch ($v2) {
+    case 1:
+      /* Items set form pub ids */
+      $items = explode(',', $pub);
+      $papers = explode(',', $e_edition);
+      $pTypes = explode(',', $pType);
+      break;
+
+    default:
+      /* because Lutcher has a comma */
+      if (strpos($e_edition, '|') !== FALSE) {
+        echo "true";
+        $items = explode(',', $e_edition);
+        $pubs = explode(',', $pub);
+        $pTypes = explode(',', $pType);
+      } else {
+        $items = [$e_edition];
+        $pubs = [$pub];
+        $pTypes = [$pType];
+      }
   }
 
   $e_editions = [];
   $ptr = 0;
   foreach ($items as $item) {
-    $arr = explode('|', $item);
-
-    if (isset($pubs[$ptr])) {
-      $pub = trim($pubs[$ptr]);
-    }
-    if (isset($pTypes[$ptr])) {
-      $pType = trim($pTypes[$ptr]);
-    }
-    $e_edition = trim($arr[0]);
 
     switch ($v2) {
       case 1:
-        if (isset($arr[0])) {
-          $site = trim($arr[0]);
-        }
-        $e_editions[$ptr]['image'] = 'https://etypeproductionstorage1.blob.core.windows.net/$web/Production_Prod/Publications/' . $pub . '/thumbnail.jpg';
-
+        $site_name = empty($papers[$ptr])? $site_name: $papers[$ptr];
+        $e_editions[$ptr]['image'] = 'https://etypeproductionstorage1.blob.core.windows.net/$web/Production_Prod/Publications/' . $item . '/thumbnail.jpg';
+        $e_editions[$ptr]['pubId'] = $item; // For login form
         /* Account Links */
-        $path = '/e-edition/';
+        $path = '/e-edition/' . $item;
         break;
 
       default:
+        $pub = trim($pubs[$ptr]);
+        $pType = trim($pTypes[$ptr]);
+        $arr = explode('|', $item);
+        $e_edition = trim($arr[0]);
         if (isset($arr[1])) {
-          $site = trim($arr[1]);
+          $site_name = trim($arr[1]);
         }
         $ar2 = preg_split("/ID[0-9]+/", $arr[0]); // make LandingImage directory name
         $imageDir = trim($ar2[0]);
@@ -477,7 +493,7 @@ function etype_e_editions(): array {
         }
     }
 
-    $e_editions[$ptr]['site_name'] = trim($site);
+    $e_editions[$ptr]['site_name'] = trim($site_name);
     $e_editions[$ptr]['path'] = $path;
     $ptr++;
   }
@@ -490,7 +506,7 @@ function etype_e_editions(): array {
 function _etype_get_site_identifier() {
   $base_path = conf_path();
   preg_match("/sites\/([-a-z]+)\..*/", $base_path, $matches);
-  return isset($matches[1])? $matches[1]: '';
+  return $matches[1] ?? '';
 }
 
 /**
@@ -614,7 +630,7 @@ enable_page_level_ads: true
 /**
  * Implement hook_ranking()
  */
-function etype_ranking(): array {
+function etype_ranking() {
   return [
     'node_created_date' => [
       'title' => t('Node Published Date'),
