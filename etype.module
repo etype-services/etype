@@ -437,9 +437,6 @@ function etype_e_editions(): array {
   $ptr = 0;
   foreach ($items as $item) {
     $arr = explode('|', $item);
-    if (isset($arr[1])) {
-      $site = trim($arr[1]);
-    }
 
     if (isset($pubs[$ptr])) {
       $pub = trim($pubs[$ptr]);
@@ -451,6 +448,9 @@ function etype_e_editions(): array {
 
     switch ($v2) {
       case 1:
+        if (isset($arr[0])) {
+          $site = trim($arr[0]);
+        }
         $e_editions[$ptr]['image'] = 'https://etypeproductionstorage1.blob.core.windows.net/$web/Production_Prod/Publications/' . $pub . '/thumbnail.jpg';
 
         /* Account Links */
@@ -458,6 +458,9 @@ function etype_e_editions(): array {
         break;
 
       default:
+        if (isset($arr[1])) {
+          $site = trim($arr[1]);
+        }
         $ar2 = preg_split("/ID[0-9]+/", $arr[0]); // make LandingImage directory name
         $imageDir = trim($ar2[0]);
         $e_editions[$ptr]['image'] = 'https://etypeservices.com/LandingPageImages/' . $imageDir . '/currentpg1.jpg';
