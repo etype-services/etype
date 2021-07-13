@@ -436,7 +436,7 @@ function etype_e_editions(): array {
     case 1:
 			$e_edition = variable_get('etype_e_edition');
 			$pub = variable_get('etype_pub');
-      /* Items set form pub ids */
+      /* Items set from pub ids */
       $items = explode(',', $pub);
       $papers = explode(',', $e_edition);
       break;
