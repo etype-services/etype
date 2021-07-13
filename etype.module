@@ -428,21 +428,23 @@ function etype_premium_access(&$node, $teaser = NULL) {
 function etype_e_editions(): array {
   $v2 = variable_get('etype_v2');
   $uid = user_is_logged_in();
-  $e_edition = empty(theme_get_setting('e_edition')) ? variable_get('etype_e_edition') : theme_get_setting('e_edition');
-  $pub = empty(theme_get_setting('pub')) ? variable_get('etype_pub') : theme_get_setting('pub');
-  $pType = empty(theme_get_setting('ptype')) ? variable_get('etype_ptype') : theme_get_setting('ptype');
   $site_name = variable_get('site_name', 'Drupal');
   $pubs = [];
+	$pTypes = [];
 
   switch ($v2) {
     case 1:
+			$e_edition = variable_get('etype_e_edition');
+			$pub = variable_get('etype_pub');
       /* Items set form pub ids */
       $items = explode(',', $pub);
       $papers = explode(',', $e_edition);
-      $pTypes = explode(',', $pType);
       break;
 
     default:
+			$e_edition = empty(theme_get_setting('e_edition')) ? variable_get('etype_e_edition') : theme_get_setting('e_edition');
+			$pub = empty(theme_get_setting('pub')) ? variable_get('etype_pub') : theme_get_setting('pub');
+			$pType = empty(theme_get_setting('ptype')) ? variable_get('etype_ptype') : theme_get_setting('ptype');
       /* because Lutcher has a comma */
       if (strpos($e_edition, '|') !== FALSE) {
         echo "true";
